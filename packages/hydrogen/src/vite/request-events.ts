@@ -44,6 +44,7 @@ export type RequestEventPayload = {
     status?: string;
     strategy?: string;
     key?: string | readonly unknown[];
+    tags?: string[];
   };
   displayName?: string;
 };

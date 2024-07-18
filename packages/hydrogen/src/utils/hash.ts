@@ -1,6 +1,8 @@
 type QueryKey = string | readonly unknown[];
 
-export function hashKey(queryKey: QueryKey): string {
+const encoder = new TextEncoder();
+
+export async function hashKey(queryKey: QueryKey): Promise<string> {
   const rawKeys = Array.isArray(queryKey) ? queryKey : [queryKey];
   let hash = '';
 
@@ -21,5 +23,16 @@ export function hashKey(queryKey: QueryKey): string {
     }
   }
 
-  return encodeURIComponent(hash);
+  const hashBuffer = await crypto.subtle.digest(
+    'sha-512',
+    encoder.encode(hash),
+  );
+
+  // Hex string
+  // return Array.from(new Uint8Array(hashBuffer))
+  //   .map((byte) => byte.toString(16).padStart(2, '0'))
+  //   .join('');
+
+  // B64 string
+  return btoa(String.fromCharCode(...new Uint8Array(hashBuffer)));
 }

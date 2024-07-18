@@ -4,12 +4,7 @@ import {
   generateCacheControlHeader,
   type CachingStrategy,
 } from './strategies';
-import {
-  getItemFromCache,
-  getKeyUrl,
-  isStale,
-  setItemInCache,
-} from './sub-request';
+import {getItemFromCache, getKeyUrl, setItemInCache} from './sub-request';
 import {type StackInfo} from '../utils/callsites';
 import {hashKey} from '../utils/hash';
 import type {WaitUntil} from '../types';
@@ -53,6 +48,7 @@ type WithCacheOptions<T = unknown> = {
   shouldCacheResult?: (value: T) => boolean;
   waitUntil?: WaitUntil;
   debugInfo?: DebugOptions;
+  cacheTags?: string[];
 };
 
 // Lock to prevent revalidating the same sub-request
@@ -75,13 +71,21 @@ export async function runWithCache<T = unknown>(
     shouldCacheResult = () => true,
     waitUntil,
     debugInfo,
+    cacheTags,
   }: WithCacheOptions<T>,
 ): Promise<T> {
   const startTime = Date.now();
-  const key = hashKey([
+  const key = await hashKey([
     // '__HYDROGEN_CACHE_ID__', // TODO purgeQueryCacheOnBuild
     ...(typeof cacheKey === 'string' ? [cacheKey] : cacheKey),
   ]);
+
+  // console.debug(key, {
+  //   original: (Array.isArray(cacheKey) ? cacheKey.join(':') : cacheKey).slice(
+  //     170,
+  //     270,
+  //   ),
+  // });
 
   let cachedDebugInfo: CachedDebugInfo | undefined;
   let userDebugInfo: CachedDebugInfo | undefined;
@@ -135,6 +139,7 @@ export async function runWithCache<T = unknown>(
               status: cacheStatus,
               strategy: generateCacheControlHeader(strategy || {}),
               key,
+              tags: cacheTags,
             },
             waitUntil,
           });
@@ -163,16 +168,18 @@ export async function runWithCache<T = unknown>(
           process.env.NODE_ENV === 'development' ? mergeDebugInfo() : undefined,
       } satisfies CachedItem,
       strategy,
+      cacheTags,
     );
 
-  const cachedItem = await getItemFromCache<CachedItem>(cacheInstance, key);
-  // console.log('--- Cache', cachedItem ? 'HIT' : 'MISS');
+  const {value: cachedItem, status: cacheStatus} =
+    await getItemFromCache<CachedItem>(cacheInstance, key);
+  // console.log('--- Cache', cacheStatus);
 
-  if (cachedItem && typeof cachedItem[0] !== 'string') {
-    const [{value: cachedResult, debugInfo}, cacheInfo] = cachedItem;
-    cachedDebugInfo = debugInfo;
+  if (cachedItem && cacheStatus !== 'MISS') {
+    cachedDebugInfo = cachedItem.debugInfo;
+    const cachedValue = cachedItem.value;
 
-    const cacheStatus = isStale(key, cacheInfo) ? 'STALE' : 'HIT';
+    console.debug(`CACHE ${cacheStatus}`);
 
     if (!swrLock.has(key) && cacheStatus === 'STALE') {
       swrLock.add(key);
@@ -210,12 +217,14 @@ export async function runWithCache<T = unknown>(
 
     // Log HIT/STALE requests
     logSubRequestEvent?.({
-      result: cachedResult,
+      result: cachedValue,
       cacheStatus,
     });
 
-    return cachedResult;
+    return cachedValue;
   }
+
+  console.debug('CACHE MISS');
 
   const result = await actionFn({addDebugData});
 

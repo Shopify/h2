@@ -10,6 +10,7 @@ import {
 } from '@shopify/hydrogen-react';
 import type {WritableDeep} from 'type-fest';
 import {fetchWithServerCache, checkGraphQLErrors} from './cache/server-fetch';
+import type {CacheKey} from './cache/run-with-cache';
 import {
   SDK_VARIANT_HEADER,
   SDK_VARIANT_SOURCE_HEADER,
@@ -118,7 +119,8 @@ export type Storefront<TI18n extends I18nBase = I18nBase> = {
     ...options: ClientVariablesInRestParams<
       StorefrontQueries,
       RawGqlString,
-      StorefrontCommonExtraParams & Pick<StorefrontQueryOptions, 'cache'>,
+      StorefrontCommonExtraParams &
+        Pick<StorefrontQueryOptions, 'cache' | 'cacheKey'>,
       AutoAddedVariableNames
     >
   ) => Promise<
@@ -193,13 +195,28 @@ type StorefrontHeaders = {
 type StorefrontQueryOptions = StorefrontCommonExtraParams & {
   query: string;
   mutation?: never;
+  /**
+   * Cache strategy.
+   */
   cache?: CachingStrategy;
+  /**
+   * Unique key used for caching. Specify it only if you want
+   * to be able to manually invalidate by cache key later.
+   */
+  cacheKey?: CacheKey;
+  /**
+   * Tags to associate with this query. Useful to invalidate
+   * the cache by specifying one of the tags.
+   */
+  cacheTags?: string[];
 };
 
 type StorefrontMutationOptions = StorefrontCommonExtraParams & {
   query?: never;
   mutation: string;
   cache?: never;
+  cacheKey?: never;
+  cacheTags?: never;
 };
 
 const defaultI18n: I18nBase = {language: 'EN', country: 'US'};
@@ -281,6 +298,8 @@ export function createStorefrontClient<TI18n extends I18nBase>(
     storefrontApiVersion,
     displayName,
     stackInfo,
+    cacheKey,
+    cacheTags,
   }: {variables?: GenericVariables; stackInfo?: StackInfo} & (
     | StorefrontQueryOptions
     | StorefrontMutationOptions
@@ -316,18 +335,23 @@ export function createStorefrontClient<TI18n extends I18nBase>(
       body: graphqlData,
     } satisfies RequestInit;
 
-    const cacheKey = [
-      url,
-      requestInit.method,
-      cacheKeyHeader,
-      requestInit.body,
-    ];
+    const cacheParams = mutation
+      ? undefined
+      : {
+          cacheInstance: cache,
+          cache: cacheOptions ?? CacheDefault(),
+          cacheKey: cacheKey ?? [
+            url,
+            requestInit.method,
+            cacheKeyHeader,
+            requestInit.body,
+          ],
+          cacheTags,
+          shouldCacheResponse: checkGraphQLErrors,
+        };
 
     const [body, response] = await fetchWithServerCache(url, requestInit, {
-      cacheInstance: mutation ? undefined : cache,
-      cache: cacheOptions || CacheDefault(),
-      cacheKey,
-      shouldCacheResponse: checkGraphQLErrors,
+      ...cacheParams,
       waitUntil,
       debugInfo: {
         requestId: requestInit.headers[STOREFRONT_REQUEST_GROUP_ID_HEADER],
