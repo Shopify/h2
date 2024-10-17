@@ -1,7 +1,7 @@
 // This comment is used during ESM build:
 //! import {createRequire} from 'module'; const require = createRequire(import.meta.url);
 
-type Api = 'storefront' | 'customer-account';
+type Api = 'storefront' | 'unstable-storefront' | 'customer-account';
 type Options<T extends boolean> = {throwIfMissing?: T};
 
 /**
@@ -16,9 +16,13 @@ export function getSchema(
   options: Options<false>,
 ): string | undefined;
 export function getSchema(api: Api, options?: Options<boolean>) {
-  if (api !== 'storefront' && api !== 'customer-account') {
+  if (
+    api !== 'storefront' &&
+    api !== 'customer-account' &&
+    api !== 'unstable-storefront'
+  ) {
     throw new Error(
-      `The provided API type "${api}" is unknown. Please use "storefront" or "customer-account".`,
+      `The provided API type "${api}" is unknown. Please use "storefront", "unstable-storefront" or "customer-account".`,
     );
   }
 

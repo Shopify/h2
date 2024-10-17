@@ -49,6 +49,24 @@ export default defineConfig([
         '\n',
       );
 
+      const unstableSchemaFile = 'unstable-storefront.schema.json';
+      const unstableTypeFile = 'unstable-storefront-api-types.d.ts';
+
+      await fs.copyFile(
+        path.resolve(hydrogenReact, unstableSchemaFile),
+        path.resolve(outDir, unstableSchemaFile),
+      );
+      await fs.copyFile(
+        path.resolve(hydrogenReact, 'src', unstableTypeFile),
+        path.resolve(outDir, unstableTypeFile),
+      );
+
+      console.log(
+        '\n',
+        'Unstable storefront API types copied from hydrogen-react',
+        '\n',
+      );
+
       const caSchemaFile = 'customer-account.schema.json';
       const caTypeFile = 'customer-account-api-types.d.ts';
 

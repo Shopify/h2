@@ -14,6 +14,7 @@
   "files": [
     "dist",
     "storefront.schema.json",
+    "unstable-storefront.schema.json",
     "customer-account.schema.json"
   ],
   "type": "commonjs",
@@ -50,7 +51,9 @@
       "default": "./dist/browser-prod/index.mjs"
     },
     "./storefront-api-types": "./dist/types/storefront-api-types.d.ts",
+    "./unstable-storefront-api-types": "./dist/types/unstable-storefront-api-types.d.ts",
     "./storefront.schema.json": "./storefront.schema.json",
+    "./unstable-storefront.schema.json": "./unstable-storefront.schema.json",
     "./customer-account.schema.json": "./customer-account.schema.json",
     "./customer-account-api-types": "./dist/types/customer-account-api-types.d.ts",
     "./package.json": "./package.json",
@@ -90,6 +93,12 @@
     "*": {
       "storefront-api-types": [
         "./dist/types/storefront-api-types.d.ts"
+      ],
+      "unstable-storefront-api-types": [
+        "./dist/types/unstable-storefront-api-types.d.ts"
+      ],
+      "customer-account-api-types": [
+        "./dist/types/customer-account-api-types.d.ts"
       ]
     }
   },
@@ -119,7 +128,7 @@
     "build:vite:umdprod": "vite build --mode umdbuild",
     "build:tsc:cjs": "cpy ./dist/types/index.d.ts ./dist/types/ --rename='index.d.cts' --flat",
     "build:tsc:es": "tsc --emitDeclarationOnly --project tsconfig.typeoutput.json",
-    "copy-storefront-types": "cpy ./src/storefront-api-types.d.ts ./dist/types/ --flat",
+    "copy-storefront-types": "cpy ./src/storefront-api-types.d.ts ./dist/types/ --flat && cpy ./src/unstable-storefront-api-types.d.ts ./dist/types/ --flat && cpy ./src/customer-account-api-types.d.ts ./dist/types/ --flat",
     "format": "prettier --write \"{src,docs}/**/*\" --ignore-unknown",
     "graphql-types": "graphql-codegen --config codegen.ts && npm run format",
     "lint": "eslint --no-error-on-unmatched-pattern --ext .js,.ts,.jsx,.tsx src",

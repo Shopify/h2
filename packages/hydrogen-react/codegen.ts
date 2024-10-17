@@ -4,11 +4,22 @@ import {
   customerAccountApiCustomScalars,
 } from './src/codegen.helpers';
 
-const SF_API_VERSION = '2024-07';
-const CA_API_VERSION = '2024-07';
+const SF_API_VERSION = '2024-04';
+const CA_API_VERSION = '2024-04';
+const SF_UNSTABLE_API_VERSION = 'unstable';
 
 const storefrontAPISchema: CodegenConfig['schema'] = {
   [`https://hydrogen-preview.myshopify.com/api/${SF_API_VERSION}/graphql.json`]:
+    {
+      headers: {
+        'X-Shopify-Storefront-Access-Token': '3b580e70970c4528da70c98e097c2fa0',
+        'content-type': 'application/json',
+      },
+    },
+};
+
+const storefrontAPIUnstableSchema: CodegenConfig['schema'] = {
+  [`https://hydrogen-preview.myshopify.com/api/${SF_UNSTABLE_API_VERSION}/graphql.json`]:
     {
       headers: {
         'X-Shopify-Storefront-Access-Token': '3b580e70970c4528da70c98e097c2fa0',
@@ -58,6 +69,44 @@ const config: CodegenConfig = {
     // The schema file, which is the local representation of the GraphQL endpoint
     './storefront.schema.json': {
       schema: storefrontAPISchema,
+      plugins: [
+        {
+          introspection: {
+            minify: true,
+          },
+        },
+      ],
+    },
+    'src/unstable-storefront-api-types.d.ts': {
+      schema: storefrontAPIUnstableSchema,
+      plugins: [
+        {
+          add: {
+            content: `
+              /**
+               * THIS FILE IS AUTO-GENERATED, DO NOT EDIT
+               * Based on Storefront API ${SF_UNSTABLE_API_VERSION}
+               * If changes need to happen to the types defined in this file, then generally the Storefront API needs to update. After it's updated, you can run \`npm run graphql-types\`.
+               * Except custom Scalars, which are defined in the \`codegen.ts\` file
+               */
+              /* eslint-disable */`,
+          },
+        },
+        {
+          typescript: {
+            useTypeImports: true,
+            // If a default type for a scalar isn't set, then instead of 'any' we set to 'unknown' for better type safety.
+            defaultScalarType: 'unknown',
+            useImplementingTypes: true,
+            enumsAsTypes: true,
+            // Define how the Storefront API's custom scalars map to TypeScript types
+            scalars: storefrontApiCustomScalars,
+          },
+        },
+      ],
+    },
+    './unstable-storefront.schema.json': {
+      schema: storefrontAPIUnstableSchema,
       plugins: [
         {
           introspection: {

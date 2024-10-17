@@ -45,6 +45,8 @@
     },
     "./storefront-api-types": "./dist/storefront-api-types.d.ts",
     "./storefront.schema.json": "./dist/storefront.schema.json",
+    "./unstable-storefront-api-types": "./dist/unstable-storefront-api-types.d.ts",
+    "./unstable-storefront.schema.json": "./dist/unstable-storefront.schema.json",
     "./customer-account-api-types": "./dist/customer-account-api-types.d.ts",
     "./customer-account.schema.json": "./dist/customer-account.schema.json",
     "./package.json": "./package.json"
@@ -53,6 +55,9 @@
     "*": {
       "storefront-api-types": [
         "./dist/storefront-api-types.d.ts"
+      ],
+      "unstable-storefront-api-types": [
+        "./dist/unstable-storefront-api-types.d.ts"
       ],
       "customer-account-api-types": [
         "./dist/customer-account-api-types.d.ts"
