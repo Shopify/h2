@@ -15,13 +15,13 @@ export default async function handleRequest(
     scriptSrc: [
       "'self'",
       'https://cdn.shopify.com',
-      'https://*.googletagmanager.com'
+      'https://*.googletagmanager.com',
     ],
     imgSrc: [
       "'self'",
       'https://cdn.shopify.com',
       'https://*.google-analytics.com',
-      'https://*.googletagmanager.com'
+      'https://*.googletagmanager.com',
     ],
     connectSrc: [
       "'self'",
@@ -32,7 +32,7 @@ export default async function handleRequest(
     shop: {
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
-    }
+    },
   });
 
   const body = await renderToReadableStream(

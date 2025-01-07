@@ -33,14 +33,36 @@ export default async function handleRequest(
     },
   );
 
+  const [reader, reader2] = body.tee();
+
+  const stream = reader2.getReader();
+
+  // read() returns a promise that resolves when a value has been received
+  stream
+    .read()
+    .then(function pump({done, value}: {done: boolean; value: Uint8Array}) {
+      if (done) {
+        // Do something with last chunk of data then exit reader
+        return;
+      }
+      // Otherwise do something here to process current chunk
+
+      console.log(new TextDecoder().decode(value));
+
+      // Read some more, and call this function again
+      return reader.read().then(pump);
+    });
+
+  console.log('here a');
   if (isbot(request.headers.get('user-agent'))) {
+    console.log('here b');
     await body.allReady;
   }
 
   responseHeaders.set('Content-Type', 'text/html');
   responseHeaders.set('Content-Security-Policy', header);
 
-  return new Response(body, {
+  return new Response(reader, {
     headers: responseHeaders,
     status: responseStatusCode,
   });
