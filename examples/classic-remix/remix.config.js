@@ -21,5 +21,6 @@ module.exports = {
     v3_relativeSplatpath: true,
     v3_throwAbortReason: true,
     v3_lazyRouteDiscovery: true,
+    v3_routeConfig: true,
   },
 };

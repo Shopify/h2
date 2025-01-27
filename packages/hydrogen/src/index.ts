@@ -177,3 +177,5 @@ export {
 } from './createHydrogenContext';
 
 export {getSitemapIndex, getSitemap} from './sitemap/sitemap';
+
+export {hydrogenRoutes} from './dev/hydrogen-routes';
