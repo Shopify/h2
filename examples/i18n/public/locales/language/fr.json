@@ -1,0 +1,132 @@
+{
+  "name": "Français",
+  "code": "fr",
+  "translation": {
+    "layout": {
+      "header": {
+        "ctas": {
+          "login": "Connexion",
+          "account": "Compte",
+          "search": "Rechercher",
+          "cart": "Panier"
+        }
+      },
+      "cart": {
+        "checkout": "Continuer le paiement",
+        "continueShopping": "Continuer les achats",
+        "empty": "Il semble que vous n'ayez encore rien ajouté. Commençons!",
+        "loading": "Chargement de la recherche...",
+        "remove": "Supprimer",
+        "subtotal": "Sous-total",
+        "title": "Panier",
+        "total": "Total",
+        "quantity": "Quantité",
+        "discounts": {
+          "title": "Réduction(s)",
+          "remove": "Supprimer",
+          "form": {
+            "label": "Code de réduction",
+            "placeholder": "Entrez un code de réduction",
+            "submit": "Appliquer"
+          }
+        }
+      },
+      "search": {
+        "noResults": "Aucun résultat trouvé pour \"{{query}}\"",
+        "results": {
+          "articles": "Articles",
+          "collections": "Collections",
+          "products": "Produits",
+          "pages": "Pages",
+          "suggestions": "Suggestions"
+        },
+        "loading": "Chargement de la recherche...",
+        "title": "Recherche",
+        "viewAll": "Voir tous les résultats pour \"{{query}}\"",
+        "form": {
+          "placeholder": "Entrez un terme de recherche",
+          "label": "Recherche",
+          "submit": "Rechercher"
+        }
+      },
+      "pagination": {
+        "next": "Charger plus ↓",
+        "previous": "↑ Charger précédent",
+        "loading": "Chargement..."
+      }
+    },
+    "home": {
+      "welcome": {
+        "title": "Bonjour le monde",
+        "subtitle": "Hydrogen rencontre i18n",
+        "description": "Accélérez la création de votre vitrine avec Hydrogen, notre boîte à oh2/i18n sans tête basée sur React et Remix. Déployez-la gratuitement sur Oxygen, notre solution d'hébergement mondiale."
+      }
+    },
+    "notFound": {
+      "title": "Page non trouvée",
+      "subtitle": "Désolé, nous n'avons pas pu trouver la page que vous recherchez.",
+      "description": "Veuillez vérifier l'URL dans la barre d'adresse et réessayer.",
+      "cta": "Aller à la page d'accueil"
+    },
+    "account": {
+      "home": {
+        "greeting": "Bienvenue dans votre compte.",
+        "personalGreeting": "Bienvenue, {{firstName}}",
+        "menu": {
+          "orders": "Commandes",
+          "profile": "Profil",
+          "addresses": "Adresses",
+          "logout": "Déconnexion"
+        }
+      },
+      "login": {
+        "title": "Se connecter",
+        "form": {
+          "email": {
+            "label": "Adresse e-mail",
+            "placeholder": "Entrez votre adresse e-mail"
+          },
+          "password": {
+            "label": "Mot de passe",
+            "placeholder": "Entrez votre mot de passe"
+          },
+          "submit": "Se connecter"
+        },
+        "forgot": "Mot de passe oublié ?",
+        "register": "S'inscrire"
+      },
+      "register": {
+        "title": "S'inscrire",
+        "description": "Créez votre compte",
+        "form": {
+          "email": {
+            "label": "Adresse e-mail",
+            "placeholder": "Entrez votre adresse e-mail"
+          },
+          "password": {
+            "label": "Mot de passe",
+            "placeholder": "Entrez votre mot de passe"
+          },
+          "confirmPassword": {
+            "label": "Confirmer le mot de passe",
+            "placeholder": "Confirmez votre mot de passe"
+          },
+          "submit": "S'inscrire"
+        },
+        "login": "Se connecter"
+      },
+      "recover": {
+        "title": "Mot de passe oublié",
+        "description": "Entrez l'adresse e-mail associée à votre compte pour recevoir un lien de réinitialisation de votre mot de passe",
+        "form": {
+          "email": {
+            "label": "Adresse e-mail",
+            "placeholder": "Entrez votre adresse e-mail"
+          },
+          "submit": "Réinitialiser le mot de passe"
+        },
+        "login": "Se connecter"
+      }
+    }
+  }
+}

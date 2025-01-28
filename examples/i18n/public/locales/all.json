@@ -1,0 +1,39 @@
+[
+  {
+    "isDefault": true,
+    "code": "US",
+    "name": "United States (USD $)",
+    "languages": [{"code": "en", "name": "English"}],
+    "prefixes": ["/en-US"]
+  },
+  {
+    "code": "CA",
+    "name": "Canada (CAD $)",
+    "languages": [
+      {"code": "en", "name": "English"},
+      {"code": "fr", "name": "French"}
+    ],
+    "prefixes": ["/en-CA", "/fr-CA"]
+  },
+  {
+    "code": "ES",
+    "name": "Spain (EUR €)",
+    "languages": [
+      {"code": "es", "name": "Spanish"},
+      {"code": "ca", "name": "Catalan"}
+    ],
+    "prefixes": ["/es-ES", "/ca-ES"]
+  },
+  {
+    "code": "FR",
+    "name": "France (EUR €)",
+    "languages": [{"code": "fr", "name": "French"}],
+    "prefixes": ["/fr-FR"]
+  },
+  {
+    "code": "DE",
+    "name": "Germany (EUR €)",
+    "languages": [{"code": "de", "name": "German"}],
+    "prefixes": ["/de-DE"]
+  }
+]

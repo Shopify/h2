@@ -1,0 +1,132 @@
+{
+  "name": "Català",
+  "code": "ca",
+  "translation": {
+    "layout": {
+      "header": {
+        "ctas": {
+          "login": "Entra",
+          "account": "Compte",
+          "search": "Cerca",
+          "cart": "Cistella"
+        }
+      },
+      "cart": {
+        "checkout": "Continua cap a la caixa",
+        "continueShopping": "Continua comprant",
+        "empty": "Sembla que encara no has afegit res, comencem!",
+        "loading": "Carregant la cerca...",
+        "remove": "Elimina",
+        "subtotal": "Subtotal",
+        "title": "Cistella",
+        "total": "Total",
+        "quantity": "Quantitat",
+        "discounts": {
+          "title": "Descompte(s)",
+          "remove": "Elimina",
+          "form": {
+            "label": "Codi de descompte",
+            "placeholder": "Entra un codi de descompte",
+            "submit": "Aplica"
+          }
+        }
+      },
+      "search": {
+        "noResults": "No s'ha trobat cap resultat per \"{{query}}\"",
+        "results": {
+          "articles": "Articles",
+          "collections": "Col·leccions",
+          "products": "Productes",
+          "pages": "Pàgines",
+          "suggestions": "Suggeriments"
+        },
+        "loading": "Carregant la cerca...",
+        "title": "Cerca",
+        "viewAll": "Veure tots els resultats per \"{{query}}\"",
+        "form": {
+          "placeholder": "Entra un terme de cerca",
+          "label": "Cerca",
+          "submit": "Cerca"
+        }
+      },
+      "pagination": {
+        "next": "Carrega més ↓",
+        "previous": "↑ Carrega l'anterior",
+        "loading": "Carregant..."
+      }
+    },
+    "home": {
+      "welcome": {
+        "title": "Hola món",
+        "subtitle": "Hydrogen es troba amb i18n",
+        "description": "Acelereu la construcció de la vostra botiga amb Hydrogen, la nostra eina sense capçalera basada en React, construïda sobre Remix. Desplegueu de forma gratuïta a Oxygen, la nostra solució d'allotjament global."
+      }
+    },
+    "notFound": {
+      "title": "Pàgina no trobada",
+      "subtitle": "Ho sentim, no hem pogut trobar la pàgina que estaves buscant.",
+      "description": "Si us plau, comprova l'URL a la barra d'adreces i torna a provar.",
+      "cta": "Ves a la pàgina d'inici"
+    },
+    "account": {
+      "home": {
+        "greeting": "Benvingut al teu compte.",
+        "personalGreeting": "Benvingut, {{firstName}}",
+        "menu": {
+          "orders": "Comandes",
+          "profile": "Perfil",
+          "addresses": "Adreces",
+          "logout": "Tanca la sessió"
+        }
+      },
+      "login": {
+        "title": "Entra.",
+        "form": {
+          "email": {
+            "label": "Correu electrònic",
+            "placeholder": "Entra la teva adreça de correu electrònic"
+          },
+          "password": {
+            "label": "Contrasenya",
+            "placeholder": "Entra la teva contrasenya"
+          },
+          "submit": "Entra"
+        },
+        "forgot": "Has oblidat la contrasenya?",
+        "register": "Registra't"
+      },
+      "register": {
+        "title": "Registra't.",
+        "description": "Crea el teu compte",
+        "form": {
+          "email": {
+            "label": "Adreça de correu electrònic",
+            "placeholder": "Entra la teva adreça de correu electrònic"
+          },
+          "password": {
+            "label": "Contrasenya",
+            "placeholder": "Introdueix la teva contrasenya"
+          },
+          "confirmPassword": {
+            "label": "Torna a introduir la contrasenya",
+            "placeholder": "Torna a introduir la teva contrasenya"
+          },
+          "submit": "Registra't"
+        },
+        "login": "Entra"
+      },
+      "recover": {
+        "title": "Has oblidat la contrasenya.",
+        "description": "Introdueix l'adreça de correu electrònic associada al teu compte per rebre un enllaç per restablir la teva contrasenya",
+        "form": {
+          "email": {
+            "label": "Adreça de correu electrònic",
+            "placeholder": "Introdueix la teva adreça de correu electrònic"
+          },
+          "submit": "Restableix la contrasenya"
+        },
+        "login": "Entra"
+      }
+    }
+  }
+}
