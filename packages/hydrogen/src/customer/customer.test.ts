@@ -56,7 +56,6 @@ const mockCustomerAccountSession: HydrogenSessionData['customerAccount'] = {
 };
 
 const mockBuyerSession = {
-  customerAccessToken: 'sha123',
   companyLocationId: '1',
 };
 
@@ -699,52 +698,6 @@ describe('customer', () => {
           }),
         );
       });
-
-      it('exchanges for a storefront customer access token for b2b', async () => {
-        const redirectPath = '/account/orders';
-        session = {
-          commit: vi.fn(() => new Promise((resolve) => resolve('cookie'))),
-          get: vi.fn(() => {
-            return {...mockCustomerAccountSession, redirectPath};
-          }) as HydrogenSession['get'],
-          set: vi.fn(),
-          unset: vi.fn(),
-        };
-
-        const customer = createCustomerAccountClient({
-          session,
-          customerAccountId: 'customerAccountId',
-          shopId: '1',
-          request: new Request('https://localhost?state=state&code=code'),
-          unstableB2b: true,
-          waitUntil: vi.fn(),
-        });
-
-        fetch.mockResolvedValue(
-          createFetchResponse(
-            {
-              access_token: 'shcat_access_token',
-              expires_in: '',
-              id_token: `${btoa('{}')}.${btoa('{"nonce": "nonce"}')}.signature`,
-              refresh_token: 'shcrt_refresh_token',
-            },
-            {ok: true},
-          ),
-        );
-
-        const response = await customer.authorize();
-
-        expect(response.status).toBe(302);
-
-        expect(fetch).toHaveBeenCalledWith(
-          expect.stringContaining('https://shopify.com/1/account/customer/api'),
-          expect.objectContaining({
-            body: expect.stringContaining(
-              'storefrontCustomerAccessTokenCreate',
-            ),
-          }),
-        );
-      });
     });
   });
 
@@ -1018,7 +971,7 @@ describe('customer', () => {
         waitUntil: vi.fn(),
       });
 
-      customer.UNSTABLE_setBuyer(mockBuyerSession);
+      customer.setBuyer(mockBuyerSession);
 
       expect(session.set).toHaveBeenCalledWith(
         BUYER_SESSION_KEY,
@@ -1037,9 +990,14 @@ describe('customer', () => {
         waitUntil: vi.fn(),
       });
 
-      const buyer = await customer.UNSTABLE_getBuyer();
+      const buyer = await customer.getBuyer();
 
-      expect(buyer).toEqual(expect.objectContaining(mockBuyerSession));
+      expect(buyer).toEqual(
+        expect.objectContaining({
+          ...mockBuyerSession,
+          customerAccessToken: 'access_token',
+        }),
+      );
     });
 
     it('returns undefined when not logged in', async () => {
@@ -1053,7 +1011,7 @@ describe('customer', () => {
 
       (session.get as any).mockReturnValueOnce(undefined);
 
-      const buyer = await customer.UNSTABLE_getBuyer();
+      const buyer = await customer.getBuyer();
 
       expect(buyer).toBeUndefined();
     });

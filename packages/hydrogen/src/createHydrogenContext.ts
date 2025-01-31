@@ -61,8 +61,6 @@ export type HydrogenContextOptions<
     authUrl?: CustomerAccountOptions['authUrl'];
     /** Use this method to overwrite the default logged-out redirect behavior. The default handler [throws a redirect](https://remix.run/docs/en/main/utils/redirect#:~:text=!session) to `/account/login` with current path as `return_to` query param. */
     customAuthStatusHandler?: CustomerAccountOptions['customAuthStatusHandler'];
-    /** UNSTABLE feature, this will eventually goes away. If true then we will exchange a customerAccessToken for a storefrontCustomerAccessToken. */
-    unstableB2b?: CustomerAccountOptions['unstableB2b'];
   };
   /** Cart handler overwrite options. See documentation for createCartHandler for more information. */
   cart?: {
@@ -197,7 +195,6 @@ export function createHydrogenContext<
     customerApiVersion: customerAccountOptions?.apiVersion,
     authUrl: customerAccountOptions?.authUrl,
     customAuthStatusHandler: customerAccountOptions?.customAuthStatusHandler,
-    unstableB2b: customerAccountOptions?.unstableB2b,
 
     // defaults
     customerAccountId: env.PUBLIC_CUSTOMER_ACCOUNT_API_CLIENT_ID,
@@ -274,8 +271,6 @@ export type HydrogenContextOptionsForDocs<
     authUrl?: string;
     /** Use this method to overwrite the default logged-out redirect behavior. The default handler [throws a redirect](https://remix.run/docs/en/main/utils/redirect#:~:text=!session) to `/account/login` with current path as `return_to` query param. */
     customAuthStatusHandler?: () => Response | NonNullable<unknown> | null;
-    /** UNSTABLE feature, this will eventually goes away. If true then we will exchange customerAccessToken for storefrontCustomerAccessToken. */
-    unstableB2b?: boolean;
   };
   /** Cart handler overwrite options. See documentation for createCartHandler for more information. */
   cart?: {

@@ -22,7 +22,7 @@ export function cartCreateDefault(
 ): CartCreateFunction {
   return async (input, optionalParams) => {
     const buyer = options.customerAccount
-      ? await options.customerAccount.UNSTABLE_getBuyer()
+      ? await options.customerAccount.getBuyer()
       : undefined;
     const {cartId, ...restOfOptionalParams} = optionalParams || {};
     const {buyerIdentity, ...restOfInput} = input;

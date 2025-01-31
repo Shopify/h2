@@ -73,14 +73,12 @@ export async function refreshToken({
   customerAccountTokenExchangeUrl,
   httpsOrigin,
   debugInfo,
-  exchangeForStorefrontCustomerAccessToken,
 }: {
   session: HydrogenSession;
   customerAccountId: string;
   customerAccountTokenExchangeUrl: string;
   httpsOrigin: string;
   debugInfo?: Partial<H2OEvent>;
-  exchangeForStorefrontCustomerAccessToken: () => Promise<void>;
 }) {
   const newBody = new URLSearchParams();
 
@@ -152,8 +150,6 @@ export async function refreshToken({
     refreshToken: refresh_token,
     idToken,
   });
-
-  await exchangeForStorefrontCustomerAccessToken();
 }
 
 export function clearSession(session: HydrogenSession): void {
@@ -169,7 +165,6 @@ export async function checkExpires({
   customerAccountTokenExchangeUrl,
   httpsOrigin,
   debugInfo,
-  exchangeForStorefrontCustomerAccessToken,
 }: {
   locks: Locks;
   expiresAt: string;
@@ -178,7 +173,6 @@ export async function checkExpires({
   customerAccountTokenExchangeUrl: string;
   httpsOrigin: string;
   debugInfo?: Partial<H2OEvent>;
-  exchangeForStorefrontCustomerAccessToken: () => Promise<void>;
 }) {
   if (parseInt(expiresAt, 10) - 1000 < new Date().getTime()) {
     try {
@@ -190,7 +184,6 @@ export async function checkExpires({
           customerAccountTokenExchangeUrl,
           httpsOrigin,
           debugInfo,
-          exchangeForStorefrontCustomerAccessToken,
         });
 
       await locks.refresh;

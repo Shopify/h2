@@ -6,7 +6,7 @@ import {CUSTOMER_LOCATIONS_QUERY} from '~/graphql/customer-account/CustomerLocat
 export async function loader({context}: LoaderFunctionArgs) {
   const {customerAccount} = context;
 
-  const buyer = await customerAccount.UNSTABLE_getBuyer();
+  const buyer = await customerAccount.getBuyer();
 
   let companyLocationId = buyer?.companyLocationId || null;
   let company = null;
@@ -23,7 +23,7 @@ export async function loader({context}: LoaderFunctionArgs) {
   if (!companyLocationId && company?.locations?.edges?.length === 1) {
     companyLocationId = company.locations.edges[0].node.id;
 
-    customerAccount.UNSTABLE_setBuyer({
+    customerAccount.setBuyer({
       companyLocationId,
     });
   }
