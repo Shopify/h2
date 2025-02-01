@@ -1,4 +1,4 @@
-import {json, type LoaderFunctionArgs} from '@remix-run/node';
+import {type LoaderFunctionArgs} from '@remix-run/node';
 import {useLoaderData} from '@remix-run/react';
 
 export async function loader({params, context}: LoaderFunctionArgs) {
@@ -25,7 +25,7 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     throw new Response(null, {status: 404});
   }
 
-  return json({product});
+  return {product};
 }
 
 export default function Product() {

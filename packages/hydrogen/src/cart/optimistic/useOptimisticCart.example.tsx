@@ -1,13 +1,13 @@
-import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Link} from '@remix-run/react';
 import {CartForm, useOptimisticCart} from '@shopify/hydrogen';
 import type {Cart} from '@shopify/hydrogen/storefront-api-types';
 
 // Root loader returns the cart data
 export async function loader({context}: LoaderFunctionArgs) {
-  return defer({
+  return {
     cart: context.cart.get(),
-  });
+  };
 }
 
 // The cart component renders each line item in the cart.

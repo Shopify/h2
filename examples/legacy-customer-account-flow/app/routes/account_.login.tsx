@@ -1,5 +1,5 @@
 import {
-  json,
+  data,
   redirect,
   type ActionFunctionArgs,
   type LoaderFunctionArgs,
@@ -18,14 +18,14 @@ export async function loader({context}: LoaderFunctionArgs) {
   if (await context.session.get('customerAccessToken')) {
     return redirect('/account');
   }
-  return json({});
+  return {};
 }
 
 export async function action({request, context}: ActionFunctionArgs) {
   const {session, storefront} = context;
 
   if (request.method !== 'POST') {
-    return json({error: 'Method not allowed'}, {status: 405});
+    return data({error: 'Method not allowed'}, {status: 405});
   }
 
   try {
@@ -57,9 +57,9 @@ export async function action({request, context}: ActionFunctionArgs) {
     return redirect('/account');
   } catch (error: unknown) {
     if (error instanceof Error) {
-      return json({error: error.message}, {status: 400});
+      return data({error: error.message}, {status: 400});
     }
-    return json({error}, {status: 400});
+    return data({error}, {status: 400});
   }
 }
 

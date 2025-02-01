@@ -1,5 +1,5 @@
 import {useFetcher} from '@remix-run/react';
-import {json} from '@remix-run/server-runtime';
+import {data} from '@remix-run/server-runtime';
 import {CartForm} from '@shopify/hydrogen';
 import invariant from 'tiny-invariant';
 
@@ -56,5 +56,5 @@ export async function action({request, context}) {
 
   const headers = cart.setCartId(result.cart.id);
 
-  return json(result, {status, headers});
+  return data(result, {status, headers});
 }

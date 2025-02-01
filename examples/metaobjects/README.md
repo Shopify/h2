@@ -76,11 +76,13 @@ To enable the Edit Route button return the env variable as `publicStoreSubdomain
 like so
 
 ```ts
+import {data, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+
 export async function loader({context}: LoaderFunctionArgs) {
   // other code ...
   const publicStoreDomain = context.env.PUBLIC_STORE_DOMAIN;
 
-  return defer(
+  return data(
     {
       // other code ...
       publicStoreSubdomain: context.env.PUBLIC_SHOPIFY_STORE_DOMAIN,
@@ -109,7 +111,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     cache: storefront.CacheNone(),
   });
 
-  return json({route});
+  return {route};
 }
 ```
 

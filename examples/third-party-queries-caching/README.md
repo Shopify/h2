@@ -127,7 +127,7 @@ export async function loader({context}: LoaderFunctionArgs) {
   const {characters} = await context.rickAndMorty.query(CHARACTERS_QUERY, {
     cache: CacheShort(),
   });
-  return json({characters});
+  return {characters};
 }
 ```
 

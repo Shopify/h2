@@ -1,6 +1,12 @@
 {
   "extends": "../../templates/skeleton/tsconfig.json",
-  "include": ["./**/*.d.ts", "./**/*.ts", "./**/*.tsx", "../../templates/skeleton/*.d.ts"],
+  "include": [
+    "./**/*.d.ts",
+    "./**/*.ts",
+    "./**/*.tsx",
+    "../../templates/skeleton/*.d.ts",
+    "../../templates/skeleton/vite.config.ts"
+  ],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

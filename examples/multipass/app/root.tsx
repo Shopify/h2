@@ -1,5 +1,5 @@
 import {useNonce, getShopAnalytics, Analytics} from '@shopify/hydrogen';
-import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {data, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {
   Links,
   Meta,
@@ -99,7 +99,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     },
   });
 
-  return defer(
+  return data(
     {
       cart: cartPromise,
       footer: footerPromise,

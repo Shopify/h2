@@ -98,7 +98,7 @@ Update the `loader` function
 ```ts
 export async function loader({context}: LoaderFunctionArgs) {
   const layout = await context.storefront.query<{shop: Shop}>(LAYOUT_QUERY);
-  return json(
+  return data(
     {
       layout,
       // 1. Pass the GTM container ID to the client

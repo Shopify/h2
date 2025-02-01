@@ -1,7 +1,7 @@
 import type {CustomerFragment} from 'storefrontapi.generated';
 import type {CustomerUpdateInput} from '@shopify/hydrogen/storefront-api-types';
 import {
-  json,
+  data,
   redirect,
   type ActionFunctionArgs,
   type LoaderFunctionArgs,
@@ -28,20 +28,20 @@ export async function loader({context}: LoaderFunctionArgs) {
   if (!customerAccessToken) {
     return redirect('/account/login');
   }
-  return json({});
+  return {};
 }
 
 export async function action({request, context}: ActionFunctionArgs) {
   const {session, storefront} = context;
 
   if (request.method !== 'PUT') {
-    return json({error: 'Method not allowed'}, {status: 405});
+    return data({error: 'Method not allowed'}, {status: 405});
   }
 
   const form = await request.formData();
   const customerAccessToken = await session.get('customerAccessToken');
   if (!customerAccessToken) {
-    return json({error: 'Unauthorized'}, {status: 401});
+    return data({error: 'Unauthorized'}, {status: 401});
   }
 
   try {
@@ -80,7 +80,7 @@ export async function action({request, context}: ActionFunctionArgs) {
 
     // check for mutation errors
     if (updated.customerUpdate?.customerUserErrors?.length) {
-      return json(
+      return data(
         {error: updated.customerUpdate?.customerUserErrors[0]},
         {status: 400},
       );
@@ -94,9 +94,9 @@ export async function action({request, context}: ActionFunctionArgs) {
       );
     }
 
-    return json({error: null, customer: updated.customerUpdate?.customer});
+    return {error: null, customer: updated.customerUpdate?.customer};
   } catch (error: any) {
-    return json({error: error.message, customer: null}, {status: 400});
+    return data({error: error.message, customer: null}, {status: 400});
   }
 }
 

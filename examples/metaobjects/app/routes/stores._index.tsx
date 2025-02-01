@@ -1,4 +1,4 @@
-import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, type MetaFunction} from '@remix-run/react';
 
 // 1. Add metaobject content imports
@@ -17,7 +17,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     cache: storefront.CacheNone(),
   });
 
-  return json({route});
+  return {route};
 }
 
 export default function Stores() {

@@ -70,7 +70,7 @@ export async function action({request, context}) {
   session.set('cartId', cartId);
 
   const {cart, errors} = result;
-  return json({cart, errors}, {status, headers});
+  return data({cart, errors}, {status, headers});
 }
 
 const USER_ERROR_FRAGMENT = `#graphql

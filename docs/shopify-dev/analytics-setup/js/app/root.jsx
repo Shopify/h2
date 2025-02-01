@@ -5,7 +5,6 @@ import {
   Analytics,
   // [END import]
 } from '@shopify/hydrogen';
-import {defer} from '@shopify/remix-oxygen';
 import {
   Links,
   Meta,
@@ -83,7 +82,7 @@ export async function loader(args) {
   const {storefront, env} = args.context;
   // [END env]
 
-  return defer({
+  return {
     ...deferredData,
     ...criticalData,
     publicStoreDomain: env.PUBLIC_STORE_DOMAIN,
@@ -103,7 +102,7 @@ export async function loader(args) {
       language: args.context.storefront.i18n.language,
     },
      // [END consent]
-  });
+  };
 }
 
 /**

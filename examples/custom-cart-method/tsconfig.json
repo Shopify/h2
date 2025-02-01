@@ -4,7 +4,8 @@
     "./**/*.d.ts",
     "./**/*.ts",
     "./**/*.tsx",
-    "../../templates/skeleton/*.d.ts"
+    "../../templates/skeleton/*.d.ts",
+    "../../templates/skeleton/vite.config.ts"
   ],
   "compilerOptions": {
     "baseUrl": ".",

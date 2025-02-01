@@ -1,4 +1,4 @@
-import {json} from '@remix-run/server-runtime';
+import {data} from '@remix-run/server-runtime';
 import {cartGetIdDefault, cartSetIdDefault} from '@shopify/hydrogen';
 
 // server.js
@@ -22,5 +22,5 @@ export async function action({context}) {
 
   const headers = cart.setCartId(result.cart.id);
 
-  return json(result, {headers});
+  return data(result, {headers});
 }

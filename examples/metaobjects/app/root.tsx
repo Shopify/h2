@@ -1,5 +1,5 @@
 import {useNonce, getShopAnalytics, Analytics} from '@shopify/hydrogen';
-import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {
   Links,
   Meta,
@@ -87,7 +87,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     },
   });
 
-  return defer({
+  return {
     cart: cartPromise,
     footer: footerPromise,
     header: await headerPromise,
@@ -110,7 +110,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     publictoreSubdomain: context.env.PUBLIC_SHOPIFY_STORE_DOMAIN,
     /**********   EXAMPLE UPDATE END   ************/
     /***********************************************/
-  });
+  };
 }
 
 export function Layout({children}: {children?: React.ReactNode}) {

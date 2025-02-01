@@ -1,5 +1,4 @@
 import {
-  defer,
   type LinksFunction,
   type LoaderFunctionArgs,
 } from '@remix-run/node';
@@ -66,11 +65,11 @@ export async function loader({context}: LoaderFunctionArgs) {
     await context.storefront.query<{shop: Shop}>(LAYOUT_QUERY),
   ]);
 
-  return defer({
+  return {
     isLoggedIn: Boolean(customerAccessToken),
     cart,
     layout,
-  });
+  };
 }
 
 export function Layout({children}: {children?: React.ReactNode}) {

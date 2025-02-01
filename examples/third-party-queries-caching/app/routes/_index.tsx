@@ -1,4 +1,4 @@
-import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData} from '@remix-run/react';
 import {CacheShort} from '@shopify/hydrogen';
 
@@ -7,7 +7,7 @@ export async function loader({context}: LoaderFunctionArgs) {
   const {characters} = await context.rickAndMorty.query(CHARACTERS_QUERY, {
     cache: CacheShort(),
   });
-  return json({characters});
+  return {characters};
 }
 
 type Character = {

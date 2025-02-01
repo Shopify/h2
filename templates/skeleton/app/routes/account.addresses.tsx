@@ -4,7 +4,7 @@ import type {
   CustomerFragment,
 } from 'customer-accountapi.generated';
 import {
-  json,
+  data,
   type ActionFunctionArgs,
   type LoaderFunctionArgs,
 } from '@shopify/remix-oxygen';
@@ -38,7 +38,7 @@ export const meta: MetaFunction = () => {
 export async function loader({context}: LoaderFunctionArgs) {
   await context.customerAccount.handleAuthStatus();
 
-  return json({});
+  return {};
 }
 
 export async function action({request, context}: ActionFunctionArgs) {
@@ -57,7 +57,7 @@ export async function action({request, context}: ActionFunctionArgs) {
     // this will ensure redirecting to login never happen for mutatation
     const isLoggedIn = await customerAccount.isLoggedIn();
     if (!isLoggedIn) {
-      return json(
+      return data(
         {error: {[addressId]: 'Unauthorized'}},
         {
           status: 401,
@@ -112,21 +112,21 @@ export async function action({request, context}: ActionFunctionArgs) {
             throw new Error('Customer address create failed.');
           }
 
-          return json({
+          return {
             error: null,
             createdAddress: data?.customerAddressCreate?.customerAddress,
             defaultAddress,
-          });
+          };
         } catch (error: unknown) {
           if (error instanceof Error) {
-            return json(
+            return data(
               {error: {[addressId]: error.message}},
               {
                 status: 400,
               },
             );
           }
-          return json(
+          return data(
             {error: {[addressId]: error}},
             {
               status: 400,
@@ -161,21 +161,21 @@ export async function action({request, context}: ActionFunctionArgs) {
             throw new Error('Customer address update failed.');
           }
 
-          return json({
+          return {
             error: null,
             updatedAddress: address,
             defaultAddress,
-          });
+          };
         } catch (error: unknown) {
           if (error instanceof Error) {
-            return json(
+            return data(
               {error: {[addressId]: error.message}},
               {
                 status: 400,
               },
             );
           }
-          return json(
+          return data(
             {error: {[addressId]: error}},
             {
               status: 400,
@@ -206,17 +206,17 @@ export async function action({request, context}: ActionFunctionArgs) {
             throw new Error('Customer address delete failed.');
           }
 
-          return json({error: null, deletedAddress: addressId});
+          return {error: null, deletedAddress: addressId};
         } catch (error: unknown) {
           if (error instanceof Error) {
-            return json(
+            return data(
               {error: {[addressId]: error.message}},
               {
                 status: 400,
               },
             );
           }
-          return json(
+          return data(
             {error: {[addressId]: error}},
             {
               status: 400,
@@ -226,7 +226,7 @@ export async function action({request, context}: ActionFunctionArgs) {
       }
 
       default: {
-        return json(
+        return data(
           {error: {[addressId]: 'Method not allowed'}},
           {
             status: 405,
@@ -236,14 +236,14 @@ export async function action({request, context}: ActionFunctionArgs) {
     }
   } catch (error: unknown) {
     if (error instanceof Error) {
-      return json(
+      return data(
         {error: error.message},
         {
           status: 400,
         },
       );
     }
-    return json(
+    return data(
       {error},
       {
         status: 400,

@@ -16,6 +16,7 @@ export {
   MaxPartSizeExceededError,
   redirect,
   redirectDocument,
+  data,
 } from '@remix-run/server-runtime';
 
 export type {

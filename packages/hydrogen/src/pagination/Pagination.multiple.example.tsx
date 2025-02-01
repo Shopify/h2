@@ -1,4 +1,4 @@
-import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {useLoaderData, Link} from '@remix-run/react';
 import {getPaginationVariables, Pagination} from '@shopify/hydrogen';
 import {type Collection} from '@shopify/hydrogen-react/storefront-api-types';
@@ -25,7 +25,7 @@ export async function loader({
     }),
   ]);
 
-  return json({womensProducts, mensProducts});
+  return {womensProducts, mensProducts};
 }
 
 export default function Collection() {

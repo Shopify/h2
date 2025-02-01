@@ -1,4 +1,4 @@
-import {json, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Link, useLoaderData, type MetaFunction} from '@remix-run/react';
 import {Money, Image, flattenConnection} from '@shopify/hydrogen';
 import type {OrderLineItemFullFragment} from 'storefrontapi.generated';
@@ -41,12 +41,12 @@ export async function loader({params, context}: LoaderFunctionArgs) {
     firstDiscount?.__typename === 'PricingPercentageValue' &&
     firstDiscount?.percentage;
 
-  return json({
+  return {
     order,
     lineItems,
     discountValue,
     discountPercentage,
-  });
+  };
 }
 
 export default function OrderRoute() {

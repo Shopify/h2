@@ -1,4 +1,3 @@
-import {json} from '@shopify/remix-oxygen';
 import {useLoaderData, Link} from '@remix-run/react';
 import {getPaginationVariables, Pagination} from '@shopify/hydrogen';
 
@@ -21,7 +20,7 @@ export async function loader({request, context: {storefront}}) {
     }),
   ]);
 
-  return json({womensProducts, mensProducts});
+  return {womensProducts, mensProducts};
 }
 
 export default function Collection() {

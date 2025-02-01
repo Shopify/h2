@@ -144,7 +144,7 @@ export class GraphQLError extends Error {
   /**
    * Note: toJSON` is internally used by `JSON.stringify(...)`.
    * The most common scenario when this error instance is going to be stringified is
-   * when it's passed to Remix' `json` and `defer` functions: e.g. `defer({promise: storefront.query(...)})`.
+   * when it's passed to Remix' `json` and `defer` functions: e.g. `{promise: storefront.query(...)}`.
    * In this situation, we don't want to expose private error information to the browser so we only
    * do it in development.
    */

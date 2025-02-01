@@ -1,13 +1,12 @@
 import {useLoaderData} from '@remix-run/react';
-import {defer} from '@remix-run/server-runtime';
 import {useOptimisticVariant} from '@shopify/hydrogen';
 
 export async function loader({context}) {
-  return defer({
+  return {
     product: await context.storefront.query('/** product query **/'),
     // Note that variants does not need to be awaited to be used by `useOptimisticVariant`
     variants: context.storefront.query('/** variants query **/'),
-  });
+  };
 }
 
 function Product() {

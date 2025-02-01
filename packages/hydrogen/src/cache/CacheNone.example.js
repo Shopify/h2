@@ -1,4 +1,3 @@
-import {json} from '@shopify/remix-oxygen';
 import {CacheNone} from '@shopify/hydrogen';
 
 export async function loader({context}) {
@@ -15,5 +14,5 @@ export async function loader({context}) {
     },
   );
 
-  return json(data);
+  return data;
 }

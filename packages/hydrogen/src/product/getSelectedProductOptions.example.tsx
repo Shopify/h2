@@ -1,5 +1,5 @@
 import {getSelectedProductOptions} from '@shopify/hydrogen';
-import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 
 export async function loader({request, params, context}: LoaderFunctionArgs) {
   const selectedOptions = getSelectedProductOptions(request);
@@ -11,7 +11,7 @@ export async function loader({request, params, context}: LoaderFunctionArgs) {
     },
   });
 
-  return json({product});
+  return {product};
 }
 
 const PRODUCT_QUERY = `#graphql
@@ -21,7 +21,7 @@ const PRODUCT_QUERY = `#graphql
       description
       options {
         name
-        values 
+        values
       }
       selectedVariant: variantBySelectedOptions(selectedOptions: $selectedOptions, ignoreUnknownOptions: true, caseInsensitiveMatch: true) {
         ...ProductVariantFragment

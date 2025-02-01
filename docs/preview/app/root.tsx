@@ -1,4 +1,4 @@
-import {json, type LinksFunction} from '@remix-run/node';
+import {type LinksFunction} from '@remix-run/node';
 import {
   Links,
   Meta,
@@ -26,9 +26,7 @@ export async function loader() {
     }
   }
 
-  return json({
-    data,
-  });
+  return {data};
 }
 
 export default function App() {

@@ -1,5 +1,5 @@
 import {Suspense} from 'react';
-import {defer, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {
   Await,
   Link,
@@ -129,7 +129,7 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
     variables: {handle},
   });
 
-  return defer({
+  return {
     product,
     variants,
     /***********************************************/
@@ -138,7 +138,7 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
     selectedSellingPlan,
     /**********   EXAMPLE UPDATE END   ************/
     /***********************************************/
-  });
+  };
 }
 
 function redirectToFirstVariant({

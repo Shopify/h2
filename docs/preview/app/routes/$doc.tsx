@@ -9,7 +9,7 @@ import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import {oneDark} from 'react-syntax-highlighter/dist/cjs/styles/prism/index.js';
 
 export async function loader({params}: LoaderFunctionArgs) {
-  return json({doc: params.doc});
+  return {doc: params.doc};
 }
 
 function getDefinition(definitions: any, type: string) {

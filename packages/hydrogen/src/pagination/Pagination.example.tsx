@@ -1,4 +1,4 @@
-import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Pagination, getPaginationVariables} from '@shopify/hydrogen';
 import {useLoaderData, Link} from '@remix-run/react';
 import {ProductConnection} from '@shopify/hydrogen/storefront-api-types';
@@ -16,7 +16,7 @@ export async function loader({
     },
   );
 
-  return json({products: data.products});
+  return {products: data.products};
 }
 
 export default function List() {

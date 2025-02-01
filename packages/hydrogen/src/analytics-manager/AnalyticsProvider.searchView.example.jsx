@@ -1,5 +1,4 @@
 import {Analytics} from '@shopify/hydrogen';
-import {json} from '@shopify/remix-oxygen';
 import {useLoaderData} from '@remix-run/react';
 
 export async function loader({request}) {
@@ -7,9 +6,7 @@ export async function loader({request}) {
   const searchParams = new URLSearchParams(url.search);
   const searchTerm = String(searchParams.get('q') || '');
 
-  return json({
-    searchTerm,
-  });
+  return {searchTerm};
 }
 
 export default function SearchPage() {

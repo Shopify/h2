@@ -21,7 +21,6 @@ Always demonstrate realistic error-handling. Skeleton templates should be a shin
 - **Have an `ErrorBoundary` in every route template.** `ErrorBoundary` is used when an Error is thrown in a “loader”, and is generally meant for unexpected errors, like 500, 503, etc. Any Storefront query or mutation error will be handled by the `ErrorBoundary`. Type the error as “unknown” since _anything_ in JS can be thrown 🙂
 - **Use the “errorElement” prop on every `<Await>` component.** When using “defer”, some promises may be rejected at a later time. The only way to handle this is to use the “errorElement” on the associated <Await> component, otherwise the error is swallowed.
 - **Use try/catch** – except in “loader”, “action”, and the Component. Those three “Route Module APIs” are handled automatically by `ErrorBoundary` and CatchBoundary, but the rest – such as “meta”, “links”, “handle”, etc. – will crash the server if an error is thrown.
-- **Have a CatchBoundary if necessary.** A CatchBoundary is used when a new Response is thrown, and is generally meant for expected errors caused by the user, such as 401, 404, etc. Note that `CatchBoundary`s will be deprecated in Remix V2, at which time we'll remove this recommendation.
 
 ### Don’t
 
@@ -45,7 +44,7 @@ export async function loader() {
   }
 
   //...
-  return defer()
+  return data
 }
 
 export function meta() {
@@ -58,12 +57,6 @@ export function meta() {
 
 export function ErrorBoundary({error}) {
   return (<div>{error.message}</div>)
-}
-
-// Note that `CatchBoundary`s will be deprecated in Remix V2
-export function CatchBoundary() {
-  const {statusText} = useCatch()
-  return (<div>{statusText}</div>)
 }
 
 export default function TheUIComponents() {
@@ -124,7 +117,7 @@ Remix-specific route API functions should be ordered and consistent in style, to
   1. Http header tweaks (`shouldRevalidate`, `headers`, `meta`, `links`)
   1. Data manipulation (`loader`, `action`)
   1. UI (`Component`)
-  1. Error handling (`ErrorBoundary`, `CatchBoundary`)
+  1. Error handling (`ErrorBoundary`)
   1. Storefront API GraphQL query strings
 - Use function declarations when possible
 - Use the most specific type available for Remix Route APIs.
@@ -158,8 +151,6 @@ export default function Component() {}
 
 export function ErrorBoundary() {}
 
-export function CatchBoundary() {}
-
 /* storefront Queries/Mutations, see more specific recommendations below  */
 ```
 
@@ -187,17 +178,18 @@ Use the correct return type in `loader()`, `action()`, etc.
 
 ### Do
 
-- Use `json()` by default
+- Return raw json object by default
+- Use `await` if you want the data to be streamed in later
 - Use `redirect()` from the `@shopify/remix-oxygen` package to redirect
-- Use `defer()` when there is a need to have content streamed in later
-- Use `new Response()` for errors (like 404s) and for unique document responses like `.xml` and `.txt`
+- Use `data()` for errors (like 404s)
+- Use `new Response()` for unique document responses like `.xml` and `.txt`
 - Use capitalized and kebab-cased headers in responses, like `Cache-Control`
 
 ### Example
 
 ```tsx
 export async function loader() {
-  return json({foo: 'bar'});
+  return {foo: 'bar'};
 }
 ```
 
@@ -210,7 +202,7 @@ export async function loader() {
 
 ```tsx
 export async function loader() {
-  return json(
+  return data(
     {foo: 'bar'},
     {
       headers: {

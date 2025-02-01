@@ -1,12 +1,12 @@
 import {Analytics, getShopAnalytics} from '@shopify/hydrogen';
-import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {Outlet, useLoaderData} from '@remix-run/react';
 
 export async function loader({context}: LoaderFunctionArgs) {
   const {cart, env} = context;
   const cartPromise = cart.get();
 
-  return defer({
+  return {
     cart: cartPromise,
     shop: getShopAnalytics({
       storefront: context.storefront,
@@ -20,7 +20,7 @@ export async function loader({context}: LoaderFunctionArgs) {
       country: context.storefront.i18n.country,
       language: context.storefront.i18n.language,
     },
-  });
+  };
 }
 
 export default function App() {

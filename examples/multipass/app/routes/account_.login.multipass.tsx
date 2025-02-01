@@ -1,5 +1,5 @@
 import {
-  json,
+  data as remixData,
   redirect,
   type ActionFunctionArgs,
   type LoaderFunctionArgs,
@@ -124,7 +124,7 @@ export async function action({request, context}: ActionFunctionArgs) {
       }
 
       // success, return token, url
-      return json(
+      return remixData(
         {data: {...data, error: null}},
         {
           status: 200,
@@ -162,7 +162,7 @@ export async function action({request, context}: ActionFunctionArgs) {
 }
 
 function handleMethodNotAllowed() {
-  return json(
+  return remixData(
     {
       data: null,
       error: 'Method not allowed.',
@@ -175,7 +175,7 @@ function handleMethodNotAllowed() {
 }
 
 function handleOptionsPreflight(origin: string) {
-  return json(null, {
+  return remixData(null, {
     status: 204,
     headers: getCorsHeaders(origin),
   });
@@ -207,7 +207,7 @@ async function handleLoggedOutResponse(options: {
 
   // For example, checkoutDomain `checkout.hydrogen.shop` or `shop.example.com` or `{shop}.myshopify.com`.
   const logOutUrl = `https://${checkoutDomain}/account/logout?return_url=${encodedCheckoutUrl}&step=contact_information`;
-  return json({data: {url: logOutUrl}, error: null});
+  return {data: {url: logOutUrl}, error: null};
 }
 
 /*
@@ -238,7 +238,7 @@ function notLoggedInResponse(options: NotLoggedInResponseType) {
   }
 
   // Always return the original URL.
-  return json({data: {url}, error});
+  return {data: {url}, error};
 }
 
 function getCorsHeaders(origin: string): {[key: string]: string} {

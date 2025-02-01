@@ -1,5 +1,5 @@
 import {Form, NavLink, Outlet, useLoaderData} from '@remix-run/react';
-import {json, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {data, redirect, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import type {CustomerFragment} from 'storefrontapi.generated';
 
 export function shouldRevalidate() {
@@ -23,12 +23,12 @@ export async function loader({request, context}: LoaderFunctionArgs) {
       return redirect('/account/login');
     } else {
       // public subroute such as /account/login...
-      return json({
+      return {
         isLoggedIn: false,
         isAccountHome,
         isPrivateRoute,
         customer: null,
-      });
+      };
     }
   } else {
     // loggedIn, default redirect to the orders page
@@ -51,7 +51,7 @@ export async function loader({request, context}: LoaderFunctionArgs) {
       throw new Error('Customer not found');
     }
 
-    return json(
+    return data(
       {isLoggedIn, isPrivateRoute, isAccountHome, customer},
       {
         headers: {

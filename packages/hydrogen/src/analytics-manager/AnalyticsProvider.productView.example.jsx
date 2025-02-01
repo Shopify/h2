@@ -1,9 +1,8 @@
 import {useLoaderData} from '@remix-run/react';
-import {json} from '@shopify/remix-oxygen';
 import {Analytics} from '@shopify/hydrogen';
 
 export async function loader() {
-  return json({
+  return {
     product: {
       id: '123',
       title: 'ABC',
@@ -16,7 +15,7 @@ export async function loader() {
         },
       },
     },
-  });
+  };
 }
 
 export default function Product() {

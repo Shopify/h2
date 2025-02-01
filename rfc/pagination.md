@@ -39,7 +39,7 @@ export async function loader({context, request}: LoaderArgs) {
     throw new Response(null, {status: 404});
   }
 
-  return json({products});
+  return {products};
 }
 ```
 
@@ -97,7 +97,7 @@ export async function loader({context, request}: LoaderArgs) {
     throw new Response(null, {status: 404});
   }
 
-  return json({products});
+  return {products};
 }
 ```
 

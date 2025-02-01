@@ -1,4 +1,4 @@
-import {type ActionFunctionArgs, json} from '@remix-run/server-runtime';
+import {type ActionFunctionArgs, data} from '@remix-run/server-runtime';
 import {
   type CartQueryDataReturn,
   type HydrogenCart,
@@ -35,5 +35,5 @@ export async function action({request, context}: ActionFunctionArgs) {
 
   const headers = cart.setCartId(result.cart.id);
 
-  return json(result, {status, headers});
+  return data(result, {status, headers});
 }

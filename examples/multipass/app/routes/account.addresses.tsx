@@ -1,7 +1,7 @@
 import type {MailingAddressInput} from '@shopify/hydrogen/storefront-api-types';
 import type {AddressFragment, CustomerFragment} from 'storefrontapi.generated';
 import {
-  json,
+  data,
   redirect,
   type ActionFunctionArgs,
   type LoaderFunctionArgs,
@@ -33,7 +33,7 @@ export async function loader({context}: LoaderFunctionArgs) {
   if (!customerAccessToken) {
     return redirect('/account/login');
   }
-  return json({});
+  return {};
 }
 
 export async function action({request, context}: ActionFunctionArgs) {
@@ -51,7 +51,7 @@ export async function action({request, context}: ActionFunctionArgs) {
 
     const customerAccessToken = await session.get('customerAccessToken');
     if (!customerAccessToken) {
-      return json({error: {[addressId]: 'Unauthorized'}}, {status: 401});
+      return data({error: {[addressId]: 'Unauthorized'}}, {status: 401});
     }
     const {accessToken} = customerAccessToken;
 
@@ -120,12 +120,12 @@ export async function action({request, context}: ActionFunctionArgs) {
             }
           }
 
-          return json({error: null, createdAddress, defaultAddress});
+          return {error: null, createdAddress, defaultAddress};
         } catch (error: unknown) {
           if (error instanceof Error) {
-            return json({error: {[addressId]: error.message}}, {status: 400});
+            return data({error: {[addressId]: error.message}}, {status: 400});
           }
-          return json({error: {[addressId]: error}}, {status: 400});
+          return data({error: {[addressId]: error}}, {status: 400});
         }
       }
 
@@ -167,12 +167,12 @@ export async function action({request, context}: ActionFunctionArgs) {
             }
           }
 
-          return json({error: null, updatedAddress, defaultAddress});
+          return {error: null, updatedAddress, defaultAddress};
         } catch (error: unknown) {
           if (error instanceof Error) {
-            return json({error: {[addressId]: error.message}}, {status: 400});
+            return data({error: {[addressId]: error.message}}, {status: 400});
           }
-          return json({error: {[addressId]: error}}, {status: 400});
+          return data({error: {[addressId]: error}}, {status: 400});
         }
       }
 
@@ -190,17 +190,17 @@ export async function action({request, context}: ActionFunctionArgs) {
             const error = customerAddressDelete.customerUserErrors[0];
             throw new Error(error.message);
           }
-          return json({error: null, deletedAddress: addressId});
+          return {error: null, deletedAddress: addressId};
         } catch (error: unknown) {
           if (error instanceof Error) {
-            return json({error: {[addressId]: error.message}}, {status: 400});
+            return data({error: {[addressId]: error.message}}, {status: 400});
           }
-          return json({error: {[addressId]: error}}, {status: 400});
+          return data({error: {[addressId]: error}}, {status: 400});
         }
       }
 
       default: {
-        return json(
+        return data(
           {error: {[addressId]: 'Method not allowed'}},
           {status: 405},
         );
@@ -208,9 +208,9 @@ export async function action({request, context}: ActionFunctionArgs) {
     }
   } catch (error: unknown) {
     if (error instanceof Error) {
-      return json({error: error.message}, {status: 400});
+      return data({error: error.message}, {status: 400});
     }
-    return json({error}, {status: 400});
+    return data({error}, {status: 400});
   }
 }
 

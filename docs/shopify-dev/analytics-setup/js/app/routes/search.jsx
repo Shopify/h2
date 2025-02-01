@@ -1,4 +1,3 @@
-import {json} from '@shopify/remix-oxygen';
 import {useLoaderData} from '@remix-run/react';
 import {getPaginationVariables, Analytics} from '@shopify/hydrogen';
 import {SearchForm} from '~/components/SearchForm';
@@ -27,7 +26,7 @@ export async function loader({request, context}) {
     return {term: '', result: null, error: error.message};
   });
 
-  return json(await searchPromise);
+  return await searchPromise;
 }
 
 /**

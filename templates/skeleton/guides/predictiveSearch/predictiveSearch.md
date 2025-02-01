@@ -194,7 +194,7 @@ async function predictiveSearch({
 
   const total = Object.values(items).reduce((acc, {length}) => acc + length, 0);
 
-  return json({term, result: {items, total}, error: null});
+  return {term, result: {items, total}, error: null};
 }
 ```
 
@@ -217,7 +217,7 @@ export async function loader({request, context}: LoaderFunctionArgs) {
   const isPredictive = url.searchParams.has('predictive');
 
   if (!isPredictive) {
-    return json({})
+    return {}
   }
 
   const searchPromise = predictiveSearch({request, context})
@@ -227,7 +227,7 @@ export async function loader({request, context}: LoaderFunctionArgs) {
     return {term: '', result: null, error: error.message};
   });
 
-  return json(await searchPromise);
+  return await searchPromise;
 }
 ```
 

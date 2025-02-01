@@ -1,5 +1,5 @@
 import {
-  json,
+  data,
   redirect,
   type LoaderFunctionArgs,
   type ActionFunctionArgs,
@@ -17,7 +17,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     return redirect('/account');
   }
 
-  return json({});
+  return {};
 }
 
 export async function action({request, context}: ActionFunctionArgs) {
@@ -26,7 +26,7 @@ export async function action({request, context}: ActionFunctionArgs) {
   const email = form.has('email') ? String(form.get('email')) : null;
 
   if (request.method !== 'POST') {
-    return json({error: 'Method not allowed'}, {status: 405});
+    return data({error: 'Method not allowed'}, {status: 405});
   }
 
   try {
@@ -37,13 +37,13 @@ export async function action({request, context}: ActionFunctionArgs) {
       variables: {email},
     });
 
-    return json({resetRequested: true});
+    return {resetRequested: true};
   } catch (error: unknown) {
     const resetRequested = false;
     if (error instanceof Error) {
-      return json({error: error.message, resetRequested}, {status: 400});
+      return data({error: error.message, resetRequested}, {status: 400});
     }
-    return json({error, resetRequested}, {status: 400});
+    return data({error, resetRequested}, {status: 400});
   }
 }
 

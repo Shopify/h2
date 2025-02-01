@@ -1,8 +1,8 @@
-import {json} from '@shopify/remix-oxygen';
+import {data} from '@shopify/remix-oxygen';
 import {generateCacheControlHeader, CacheShort} from '@shopify/hydrogen';
 
 export async function loader() {
-  return json(
+  return data(
     {some: 'data'},
     {
       headers: {

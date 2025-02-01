@@ -941,6 +941,66 @@ describe('customer', () => {
         expect(customAuthStatusHandler).toHaveBeenCalledOnce();
       }
     });
+
+    it('handles Remix `https://localhost/account/orders.data` url extensions when passing current path as param if logged out', async () => {
+      const customer = createCustomerAccountClient({
+        session,
+        customerAccountId: 'customerAccountId',
+        customerAccountUrl: 'https://customer-api',
+        request: new Request('https://localhost/account/orders.data'),
+        waitUntil: vi.fn(),
+      });
+      (session.get as any).mockReturnValueOnce(undefined);
+
+      try {
+        await customer.handleAuthStatus();
+      } catch (error) {
+        expect((error as Response).status).toBe(302);
+        expect((error as Response).headers.get('location')).toBe(
+          '/account/login?return_to=%2Faccount%2Forders',
+        );
+      }
+    });
+
+    it('handles Remix `https://localhost/account/_root.data` url extensions when passing current path as param if logged out', async () => {
+      const customer = createCustomerAccountClient({
+        session,
+        customerAccountId: 'customerAccountId',
+        customerAccountUrl: 'https://customer-api',
+        request: new Request('https://localhost/account/_root.data'),
+        waitUntil: vi.fn(),
+      });
+      (session.get as any).mockReturnValueOnce(undefined);
+
+      try {
+        await customer.handleAuthStatus();
+      } catch (error) {
+        expect((error as Response).status).toBe(302);
+        expect((error as Response).headers.get('location')).toBe(
+          '/account/login?return_to=%2Faccount',
+        );
+      }
+    });
+
+    it('handles Remix `https://localhost/_root.data` url extensions when passing current path as param if logged out', async () => {
+      const customer = createCustomerAccountClient({
+        session,
+        customerAccountId: 'customerAccountId',
+        customerAccountUrl: 'https://customer-api',
+        request: new Request('https://localhost/_root.data'),
+        waitUntil: vi.fn(),
+      });
+      (session.get as any).mockReturnValueOnce(undefined);
+
+      try {
+        await customer.handleAuthStatus();
+      } catch (error) {
+        expect((error as Response).status).toBe(302);
+        expect((error as Response).headers.get('location')).toBe(
+          '/account/login?return_to=%2F',
+        );
+      }
+    });
   });
 
   describe('query', () => {

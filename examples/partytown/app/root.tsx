@@ -1,5 +1,5 @@
 import {Script, useNonce, getShopAnalytics, Analytics} from '@shopify/hydrogen';
-import {defer, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {
   Links,
   Meta,
@@ -81,7 +81,7 @@ export async function loader(args: LoaderFunctionArgs) {
 
   const {storefront, env} = args.context;
 
-  return defer({
+  return {
     ...deferredData,
     ...criticalData,
     publicStoreDomain: env.PUBLIC_STORE_DOMAIN,
@@ -102,7 +102,7 @@ export async function loader(args: LoaderFunctionArgs) {
     gtmContainerId: args.context.env.GTM_CONTAINER_ID,
     /**********   EXAMPLE UPDATE END   ************/
     /***********************************************/
-  });
+  };
 }
 
 /**

@@ -132,7 +132,7 @@ import {
   isRouteErrorResponse,
   useLocation,
 } from '@remix-run/react';
-import {type LoaderFunctionArgs, json} from '@shopify/remix-oxygen';
+import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 
 export async function loader({context}: LoaderFunctionArgs) {
   const {data} = await context.customerAccount.query<{
@@ -146,7 +146,7 @@ export async function loader({context}: LoaderFunctionArgs) {
     }
     `);
 
-  return json({customer: data.customer});
+  return {customer: data.customer};
 }
 
 export function ErrorBoundary() {

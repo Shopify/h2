@@ -229,7 +229,7 @@ export async function loader({params, request, context}: LoaderFunctionArgs) {
   const selectedVariant = product.variants.nodes[0];
 
   // 5. Pass the selectedSellingPlan to the client
-  return json({product, selectedVariant, selectedSellingPlan});
+  return {product, selectedVariant, selectedSellingPlan};
 }
 ```
 

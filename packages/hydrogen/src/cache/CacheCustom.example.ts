@@ -1,4 +1,4 @@
-import {json, type LoaderFunctionArgs} from '@shopify/remix-oxygen';
+import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {CacheCustom} from '@shopify/hydrogen';
 
 export async function loader({context}: LoaderFunctionArgs) {
@@ -18,5 +18,5 @@ export async function loader({context}: LoaderFunctionArgs) {
     },
   );
 
-  return json(data);
+  return data;
 }
