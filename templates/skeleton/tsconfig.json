@@ -14,7 +14,11 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "baseUrl": ".",
-    "types": ["@shopify/oxygen-workers-types", "@remix-run/node", "vite/client"],
+    "types": [
+      "@shopify/oxygen-workers-types",
+      "@remix-run/node",
+      "vite/client"
+    ],
     "paths": {
       "~/*": ["app/*"]
     },

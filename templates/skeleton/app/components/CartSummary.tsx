@@ -1,8 +1,8 @@
 import type {CartApiQueryFragment} from 'storefrontapi.generated';
 import type {CartLayout} from '~/components/CartMain';
 import {CartForm, Money, type OptimisticCart} from '@shopify/hydrogen';
-import { useRef } from 'react';
-import { FetcherWithComponents } from '@remix-run/react';
+import {useRef} from 'react';
+import {FetcherWithComponents} from '@remix-run/react';
 
 type CartSummaryProps = {
   cart: OptimisticCart<CartApiQueryFragment | null>;
@@ -110,7 +110,8 @@ function CartGiftCard({
 }) {
   const appliedGiftCardCodes = useRef<string[]>([]);
   const giftCardCodeInput = useRef<HTMLInputElement>(null);
-  const codes: string[] = giftCardCodes?.map(({lastCharacters}) => `***${lastCharacters}`) || [];
+  const codes: string[] =
+    giftCardCodes?.map(({lastCharacters}) => `***${lastCharacters}`) || [];
 
   function saveAppliedCode(code: string) {
     const formattedCode = code.replace(/\s/g, ''); // Remove spaces
@@ -141,9 +142,17 @@ function CartGiftCard({
       </dl>
 
       {/* Show an input to apply a discount */}
-      <UpdateGiftCardForm giftCardCodes={appliedGiftCardCodes.current} saveAppliedCode={saveAppliedCode}>
+      <UpdateGiftCardForm
+        giftCardCodes={appliedGiftCardCodes.current}
+        saveAppliedCode={saveAppliedCode}
+      >
         <div>
-          <input type="text" name="giftCardCode" placeholder="Gift card code" ref={giftCardCodeInput} />
+          <input
+            type="text"
+            name="giftCardCode"
+            placeholder="Gift card code"
+            ref={giftCardCodeInput}
+          />
           &nbsp;
           <button type="submit">Apply</button>
         </div>
@@ -172,7 +181,9 @@ function UpdateGiftCardForm({
     >
       {(fetcher: FetcherWithComponents<any>) => {
         const code = fetcher.formData?.get('giftCardCode');
-        if (code) saveAppliedCode && saveAppliedCode(code as string);
+        if (code && saveAppliedCode) {
+          saveAppliedCode(code as string);
+        }
         return children;
       }}
     </CartForm>

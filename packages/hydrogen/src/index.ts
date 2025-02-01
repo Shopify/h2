@@ -1,162 +1,126 @@
-export * from './storefront';
-export {type CacheKey} from './cache/run-with-cache';
+export {
+  Analytics,
+  getShopAnalytics,
+  type ShopAnalytics,
+  useAnalytics,
+} from './analytics-manager/AnalyticsProvider';
+export {
+  type CartLineUpdatePayload,
+  type CartUpdatePayload,
+  type CartViewPayload,
+  type CollectionViewPayload,
+  type PageViewPayload,
+  type ProductViewPayload,
+  type SearchViewPayload,
+} from './analytics-manager/AnalyticsView';
+export {AnalyticsEvent} from './analytics-manager/events';
 export {createWithCache, type WithCache} from './cache/create-with-cache';
+export {InMemoryCache} from './cache/in-memory';
+export {type CacheKey} from './cache/run-with-cache';
 export {
   CacheCustom,
   CacheLong,
   CacheNone,
   CacheShort,
-  generateCacheControlHeader,
   type CachingStrategy,
+  generateCacheControlHeader,
   type NoStoreStrategy,
 } from './cache/strategies';
-export {InMemoryCache} from './cache/in-memory';
-
-export {storefrontRedirect} from './routing/redirect';
-export {graphiqlLoader} from './routing/graphiql';
-export {Seo} from './seo/seo';
-export {getSeoMeta} from './seo/getSeoMeta';
-export {type SeoConfig} from './seo/generate-seo-tags';
-export type {SeoHandleFunction} from './seo/seo';
-export {Pagination, getPaginationVariables} from './pagination/Pagination';
-export {createCustomerAccountClient} from './customer/customer';
-export type {
-  CustomerAccount,
-  CustomerAccountQueries,
-  CustomerAccountMutations,
-} from './customer/types';
-export {changelogHandler} from './changelogHandler';
-
 export {
-  CartForm,
   type CartActionInput,
+  CartForm,
   type OptimisticCartLineInput,
 } from './cart/CartForm';
-export {cartCreateDefault} from './cart/queries/cartCreateDefault';
-export {cartGetDefault} from './cart/queries/cartGetDefault';
-export {cartLinesAddDefault} from './cart/queries/cartLinesAddDefault';
-export {cartLinesUpdateDefault} from './cart/queries/cartLinesUpdateDefault';
-export {cartLinesRemoveDefault} from './cart/queries/cartLinesRemoveDefault';
-export {cartDiscountCodesUpdateDefault} from './cart/queries/cartDiscountCodesUpdateDefault';
-export {cartGiftCardCodesUpdateDefault} from './cart/queries/cartGiftCardCodeUpdateDefault';
-export {cartBuyerIdentityUpdateDefault} from './cart/queries/cartBuyerIdentityUpdateDefault';
-export {cartNoteUpdateDefault} from './cart/queries/cartNoteUpdateDefault';
-export {cartSelectedDeliveryOptionsUpdateDefault} from './cart/queries/cartSelectedDeliveryOptionsUpdateDefault';
-export {cartAttributesUpdateDefault} from './cart/queries/cartAttributesUpdateDefault';
-export {cartMetafieldsSetDefault} from './cart/queries/cartMetafieldsSetDefault';
-export {cartMetafieldDeleteDefault} from './cart/queries/cartMetafieldDeleteDefault';
 export {cartGetIdDefault} from './cart/cartGetIdDefault';
 export {cartSetIdDefault, type CookieOptions} from './cart/cartSetIdDefault';
 export {
-  type HydrogenCartCustom,
-  type HydrogenCart,
   createCartHandler,
+  type HydrogenCart,
+  type HydrogenCartCustom,
 } from './cart/createCartHandler';
+export {
+  type OptimisticCart,
+  type OptimisticCartLine,
+  useOptimisticCart,
+} from './cart/optimistic/useOptimisticCart';
 export type {
-  MetafieldWithoutOwnerId,
-  CartReturn,
   CartQueryDataReturn,
   CartQueryOptions,
   CartQueryReturn,
+  CartReturn,
+  MetafieldWithoutOwnerId,
 } from './cart/queries/cart-types';
-
+export {cartAttributesUpdateDefault} from './cart/queries/cartAttributesUpdateDefault';
+export {cartBuyerIdentityUpdateDefault} from './cart/queries/cartBuyerIdentityUpdateDefault';
+export {cartCreateDefault} from './cart/queries/cartCreateDefault';
+export {cartDiscountCodesUpdateDefault} from './cart/queries/cartDiscountCodesUpdateDefault';
+export {cartGetDefault} from './cart/queries/cartGetDefault';
+export {cartGiftCardCodesUpdateDefault} from './cart/queries/cartGiftCardCodeUpdateDefault';
+export {cartLinesAddDefault} from './cart/queries/cartLinesAddDefault';
+export {cartLinesRemoveDefault} from './cart/queries/cartLinesRemoveDefault';
+export {cartLinesUpdateDefault} from './cart/queries/cartLinesUpdateDefault';
+export {cartMetafieldDeleteDefault} from './cart/queries/cartMetafieldDeleteDefault';
+export {cartMetafieldsSetDefault} from './cart/queries/cartMetafieldsSetDefault';
+export {cartNoteUpdateDefault} from './cart/queries/cartNoteUpdateDefault';
+export {cartSelectedDeliveryOptionsUpdateDefault} from './cart/queries/cartSelectedDeliveryOptionsUpdateDefault';
+export {changelogHandler} from './changelogHandler';
 export {
-  useOptimisticCart,
-  type OptimisticCart,
-  type OptimisticCartLine,
-} from './cart/optimistic/useOptimisticCart';
-
+  createHydrogenContext,
+  type HydrogenContext,
+} from './createHydrogenContext';
+export {createContentSecurityPolicy, useNonce} from './csp/csp';
+export {Script} from './csp/Script';
+export {createCustomerAccountClient} from './customer/customer';
+export type {
+  CustomerAccount,
+  CustomerAccountMutations,
+  CustomerAccountQueries,
+} from './customer/types';
 export {
-  VariantSelector,
-  getSelectedProductOptions,
-} from './product/VariantSelector';
-
+  type ConsentStatus,
+  type CustomerPrivacy,
+  type CustomerPrivacyApiProps,
+  type CustomerPrivacyConsentConfig,
+  type CustomEventMap,
+  type PrivacyBanner,
+  type SetConsentHeadlessParams,
+  useCustomerPrivacy,
+  type VisitorConsent,
+  type VisitorConsentCollected,
+} from './customer-privacy/ShopifyCustomerPrivacy';
+export {
+  OptimisticInput,
+  useOptimisticData,
+} from './optimistic-ui/optimistic-ui';
+export {getPaginationVariables, Pagination} from './pagination/Pagination';
 export {useOptimisticVariant} from './product/useOptimisticVariant';
-
 export type {
   VariantOption,
   VariantOptionValue,
 } from './product/VariantSelector';
-
-export {createContentSecurityPolicy, useNonce} from './csp/csp';
-export {Script} from './csp/Script';
-
 export {
-  useOptimisticData,
-  OptimisticInput,
-} from './optimistic-ui/optimistic-ui';
-
-export {ShopPayButton} from './shop/ShopPayButton';
-
-export {
-  Analytics,
-  useAnalytics,
-  getShopAnalytics,
-  type ShopAnalytics,
-} from './analytics-manager/AnalyticsProvider';
-export {AnalyticsEvent} from './analytics-manager/events';
-export {
-  type PageViewPayload,
-  type ProductViewPayload,
-  type CollectionViewPayload,
-  type CartViewPayload,
-  type SearchViewPayload,
-  type CartUpdatePayload,
-  type CartLineUpdatePayload,
-} from './analytics-manager/AnalyticsView';
-
-export {
-  type ConsentStatus,
-  type VisitorConsent,
-  type VisitorConsentCollected,
-  type CustomerPrivacyConsentConfig,
-  type SetConsentHeadlessParams,
-  type CustomerPrivacy,
-  type PrivacyBanner,
-  type CustomEventMap,
-  type CustomerPrivacyApiProps,
-  useCustomerPrivacy,
-} from './customer-privacy/ShopifyCustomerPrivacy';
-
-export {
-  AnalyticsEventName,
-  AnalyticsPageType,
-  ExternalVideo,
-  flattenConnection,
-  getClientBrowserParameters,
-  getShopifyCookies,
-  Image,
-  IMAGE_FRAGMENT,
-  MediaFile,
-  ModelViewer,
-  Money,
-  parseGid,
-  parseMetafield,
-  sendShopifyAnalytics,
-  ShopifySalesChannel,
-  storefrontApiCustomScalars,
-  customerAccountApiCustomScalars,
-  useLoadScript,
-  useMoney,
-  useShopifyCookies,
-  Video,
-  isOptionValueCombinationInEncodedVariant,
-  decodeEncodedVariant,
-  getProductOptions,
-  getAdjacentAndFirstAvailableVariants,
-  mapSelectedProductOptionToObject,
-  useSelectedOptionInUrlParam,
-} from '@shopify/hydrogen-react';
+  getSelectedProductOptions,
+  VariantSelector,
+} from './product/VariantSelector';
 export {RichText} from './RichText';
-
+export {graphiqlLoader} from './routing/graphiql';
+export {storefrontRedirect} from './routing/redirect';
+export {type SeoConfig} from './seo/generate-seo-tags';
+export {getSeoMeta} from './seo/getSeoMeta';
+export type {SeoHandleFunction} from './seo/seo';
+export {Seo} from './seo/seo';
+export {ShopPayButton} from './shop/ShopPayButton';
+export {getSitemap, getSitemapIndex} from './sitemap/sitemap';
+export * from './storefront';
+export type {HydrogenEnv, HydrogenSession, HydrogenSessionData} from './types';
 export type {
   ClientBrowserParameters,
   MappedProductOptions,
   ParsedMetafields,
-  ShopifyAddToCart,
-  ShopifyAddToCartPayload,
   // TODO: document this change
   ShopifyAnalytics as SendShopifyAnalyticsEvent,
+  ShopifyAddToCart,
+  ShopifyAddToCartPayload,
   ShopifyAnalyticsPayload,
   ShopifyAnalyticsProduct,
   ShopifyCookies,
@@ -168,12 +132,32 @@ export type {
   StorefrontApiResponseOkPartial,
   StorefrontApiResponsePartial,
 } from '@shopify/hydrogen-react';
-
-export type {HydrogenSessionData, HydrogenSession, HydrogenEnv} from './types';
-
 export {
-  createHydrogenContext,
-  type HydrogenContext,
-} from './createHydrogenContext';
-
-export {getSitemapIndex, getSitemap} from './sitemap/sitemap';
+  AnalyticsEventName,
+  AnalyticsPageType,
+  customerAccountApiCustomScalars,
+  decodeEncodedVariant,
+  ExternalVideo,
+  flattenConnection,
+  getAdjacentAndFirstAvailableVariants,
+  getClientBrowserParameters,
+  getProductOptions,
+  getShopifyCookies,
+  Image,
+  IMAGE_FRAGMENT,
+  isOptionValueCombinationInEncodedVariant,
+  mapSelectedProductOptionToObject,
+  MediaFile,
+  ModelViewer,
+  Money,
+  parseGid,
+  parseMetafield,
+  sendShopifyAnalytics,
+  ShopifySalesChannel,
+  storefrontApiCustomScalars,
+  useLoadScript,
+  useMoney,
+  useSelectedOptionInUrlParam,
+  useShopifyCookies,
+  Video,
+} from '@shopify/hydrogen-react';

@@ -6,7 +6,7 @@
     "build": "shopify hydrogen build --codegen --diff",
     "dev": "shopify hydrogen dev --codegen --diff",
     "preview": "shopify hydrogen preview --build --diff",
-    "lint": "eslint --no-error-on-unmatched-pattern --ext .js,.ts,.jsx,.tsx .",
+    "lint": "eslint --no-error-on-unmatched-pattern .",
     "typecheck": "tsc --noEmit",
     "codegen": "shopify hydrogen codegen"
   }

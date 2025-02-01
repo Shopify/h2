@@ -169,6 +169,7 @@ function TabButtonsBar({children}: {children: React.ReactNode}) {
   return (
     <div
       id="tab-buttons-wrapper"
+      // eslint-disable-next-line react/no-unknown-property
       onResize={(event) => setFade(event.currentTarget)}
     >
       <div

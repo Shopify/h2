@@ -5,7 +5,7 @@ import type {
   // [END csp]
 } from '@shopify/remix-oxygen';
 import {RemixServer} from '@remix-run/react';
-import isbot from 'isbot';
+import {isbot} from 'isbot';
 import {renderToReadableStream} from 'react-dom/server';
 import {createContentSecurityPolicy} from '@shopify/hydrogen';
 

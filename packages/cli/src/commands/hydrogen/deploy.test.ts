@@ -644,7 +644,7 @@ describe('deploy', async () => {
         ...expectedConfig,
         buildCommand: 'hocus pocus',
       },
-      hooks: hooks,
+      hooks,
       logger: deploymentLogger,
     });
   });

@@ -710,7 +710,6 @@ describe('upgrade', async () => {
         '@remix-run/react@2.1.0',
         '@remix-run/server-runtime@2.1.0',
         '@remix-run/dev@2.1.0',
-        '@remix-run/eslint-config@2.1.0',
         '@remix-run/css-bundle@2.1.0',
       ];
 
@@ -745,7 +744,6 @@ describe('upgrade', async () => {
         '@remix-run/react@2.1.0',
         '@remix-run/server-runtime@2.1.0',
         '@remix-run/dev@2.1.0',
-        '@remix-run/eslint-config@2.1.0',
         '@remix-run/css-bundle@2.1.0',
       ];
 

@@ -81,6 +81,7 @@ export function useInstantCheckout() {
       });
 
       if (errors) {
+        // eslint-disable-next-line @typescript-eslint/no-base-to-string
         updateError(errors.toString());
         updateCart(undefined);
         updateCheckoutUrl(undefined);

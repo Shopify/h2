@@ -72,6 +72,7 @@ export const isOptionValueCombinationInEncodedVariant: IsOptionValueCombinationI
 
 type EncodedVariantField =
   | Product['encodedVariantAvailability']
+  // eslint-disable-next-line @typescript-eslint/no-duplicate-type-constituents
   | Product['encodedVariantExistence'];
 type DecodedOptionValues = number[][];
 

@@ -306,6 +306,7 @@ function AnalyticsProvider({
     customCanTrack ? () => customCanTrack : () => shopifyCanTrack,
   );
 
+  // eslint-disable-next-line no-extra-boolean-cast
   if (!!shop) {
     // If mock shop is used, log error instead of throwing
     if (/\/68817551382$/.test(shop.shopId)) {

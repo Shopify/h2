@@ -122,7 +122,7 @@ describe(`parseMetafield`, () => {
       expect((parsed?.parsedValue as {test: string})?.test === 'testing').toBe(
         true,
       );
-      expectType<null | unknown>(parsed?.parsedValue);
+      expectType<unknown>(parsed?.parsedValue);
 
       // with an extra generic, we can use that as the type instead
       const parsedOtherType =

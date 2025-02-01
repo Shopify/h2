@@ -729,7 +729,7 @@ async function promptUpgradeOptions(
 
   return renderSelectPrompt({
     message: `Available Hydrogen versions (current: ${currentVersion})`,
-    choices: choices,
+    choices,
     defaultValue: choices[0]?.value, // Latest version
   });
 }

@@ -158,36 +158,37 @@ export function useMoney(money: MoneyV2): UseMoneyValue {
   // create formatters if they are going to be used.
   const lazyFormatters = useMemo(
     () => ({
-      original: () => money,
-      currencyCode: () => money.currencyCode,
+      original: (): MoneyV2 => money,
+      currencyCode: (): CurrencyCode => money.currencyCode,
 
-      localizedString: () => defaultFormatter().format(amount),
+      localizedString: (): string => defaultFormatter().format(amount),
 
-      parts: () => defaultFormatter().formatToParts(amount),
+      parts: (): Intl.NumberFormatPart[] =>
+        defaultFormatter().formatToParts(amount),
 
-      withoutTrailingZeros: () =>
+      withoutTrailingZeros: (): string =>
         amount % 1 === 0
           ? withoutTrailingZerosFormatter().format(amount)
           : defaultFormatter().format(amount),
 
-      withoutTrailingZerosAndCurrency: () =>
+      withoutTrailingZerosAndCurrency: (): string =>
         amount % 1 === 0
           ? withoutTrailingZerosOrCurrencyFormatter().format(amount)
           : withoutCurrencyFormatter().format(amount),
 
-      currencyName: () =>
+      currencyName: (): string =>
         nameFormatter().formatToParts(amount).find(isPartCurrency)?.value ??
         money.currencyCode, // e.g. "US dollars"
 
-      currencySymbol: () =>
+      currencySymbol: (): string =>
         defaultFormatter().formatToParts(amount).find(isPartCurrency)?.value ??
         money.currencyCode, // e.g. "USD"
 
-      currencyNarrowSymbol: () =>
+      currencyNarrowSymbol: (): string =>
         narrowSymbolFormatter().formatToParts(amount).find(isPartCurrency)
           ?.value ?? '', // e.g. "$"
 
-      amount: () =>
+      amount: (): string =>
         defaultFormatter()
           .formatToParts(amount)
           .filter((part) =>

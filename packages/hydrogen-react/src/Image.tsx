@@ -1,6 +1,5 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable hydrogen/prefer-image-component */
 import * as React from 'react';
 import type {PartialDeep} from 'type-fest';
 import type {Image as ImageType} from './storefront-api-types.js';

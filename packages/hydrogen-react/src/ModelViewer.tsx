@@ -105,7 +105,7 @@ export function ModelViewer(props: ModelViewerProps): JSX.Element | null {
       },
     );
 
-    return () => {
+    return (): void => {
       if (modelViewer == null) {
         return;
       }

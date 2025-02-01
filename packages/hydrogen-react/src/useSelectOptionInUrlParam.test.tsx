@@ -2,9 +2,9 @@ import {vi, afterEach, describe, expect, it} from 'vitest';
 import {renderHook} from '@testing-library/react';
 import {useSelectedOptionInUrlParam} from './useSelectedOptionInUrlParam.js';
 
-type mockOptions = {search?: string; pathname?: string};
+type MockOptions = {search?: string; pathname?: string};
 
-const globalMocks = ({search = '', pathname = ''}: mockOptions) => {
+const globalMocks = ({search = '', pathname = ''}: MockOptions) => {
   let currentSearch = search;
   let currentPathname = pathname;
 
@@ -33,7 +33,7 @@ const globalMocks = ({search = '', pathname = ''}: mockOptions) => {
   };
 };
 
-const mockGlobals = (options?: mockOptions) => {
+const mockGlobals = (options?: MockOptions) => {
   const mocks = globalMocks(options || {});
 
   vi.stubGlobal('location', mocks.location);

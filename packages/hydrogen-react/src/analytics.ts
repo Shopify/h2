@@ -204,13 +204,10 @@ function getNavigationTypeLegacy(): string | undefined {
       switch (rawType) {
         case PerformanceNavigation.TYPE_NAVIGATE:
           return 'navigate';
-          break;
         case PerformanceNavigation.TYPE_RELOAD:
           return 'reload';
-          break;
         case PerformanceNavigation.TYPE_BACK_FORWARD:
           return 'back_forward';
-          break;
         default:
           return `unknown: ${rawType}`;
       }

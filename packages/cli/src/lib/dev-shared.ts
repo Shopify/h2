@@ -126,7 +126,7 @@ export function getUtilityBannerlines(host: string) {
 
   return [
     `View GraphiQL API browser: \n${getGraphiQLUrl({
-      host: host,
+      host,
     })}`,
     `View server network requests: \n${host}/subrequest-profiler`,
   ].map((value, index) => ({

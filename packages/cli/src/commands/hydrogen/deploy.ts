@@ -5,6 +5,8 @@ import {
   outputContent,
   outputInfo,
   outputWarn,
+  Logger,
+  LogLevel,
 } from '@shopify/cli-kit/node/output';
 import {readAndParseDotEnv} from '@shopify/cli-kit/node/dot-env';
 import {AbortError} from '@shopify/cli-kit/node/error';
@@ -22,7 +24,6 @@ import {
   renderTasks,
   renderWarning,
 } from '@shopify/cli-kit/node/ui';
-import {Logger, LogLevel} from '@shopify/cli-kit/node/output';
 import {ciPlatform} from '@shopify/cli-kit/node/context/local';
 import {
   CompletedDeployment,

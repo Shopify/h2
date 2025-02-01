@@ -1,9 +1,0 @@
-build
-node_modules
-bin
-*.d.ts
-dist
-coverage
-packages/hydrogen-react/codegen.ts
-packages/hydrogen-react/vite.config.ts
-packages/hydrogen-react/vitest.setup.ts

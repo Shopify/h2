@@ -26,6 +26,7 @@ const createFetchSpy = ({
       getShopDomainMonorailEndpoint(shopDomain);
     if (input === MONORAIL_ENDPOINT || input === shopDomainMonorailEndpoint) {
       if (init?.body) {
+        // eslint-disable-next-line @typescript-eslint/no-base-to-string
         const reqData = init.body.toString();
         const data = JSON.parse(reqData || '{}') as unknown;
 

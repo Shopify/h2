@@ -15,9 +15,9 @@ export const Script = forwardRef<HTMLScriptElement, ScriptProps>(
   (props, ref) => {
     const {waitForHydration, src, ...rest} = props;
 
-    if (waitForHydration) return <LazyScript src={src} options={rest} />;
-
     const nonce = useNonce();
+
+    if (waitForHydration) return <LazyScript src={src} options={rest} />;
 
     return (
       <script

@@ -70,6 +70,7 @@
   "dependencies": {
     "@shopify/hydrogen-react": "2025.1.0",
     "content-security-policy-builder": "^2.2.0",
+    "isbot": "^5.1.21",
     "source-map-support": "^0.5.21",
     "type-fest": "^4.26.1",
     "use-resize-observer": "^9.1.0",

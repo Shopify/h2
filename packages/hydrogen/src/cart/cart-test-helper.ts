@@ -1,7 +1,6 @@
-import {CachingStrategy} from '../cache/strategies';
+import {CachingStrategy, CacheNone} from '../cache/strategies';
 import type {ExecutionArgs} from 'graphql';
 import {Storefront} from '../storefront';
-import {CacheNone} from '../cache/strategies';
 import {CustomerAccount} from '../customer/types';
 
 export const BUYER_ACCESS_TOKEN = 'sha123';
@@ -72,7 +71,7 @@ export function mockCreateStorefrontClient() {
   return {
     query: storefrontQuery,
     mutate: storefrontMutate,
-    CacheNone: CacheNone,
+    CacheNone,
   } as Storefront;
 }
 

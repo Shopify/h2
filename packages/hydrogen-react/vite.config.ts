@@ -113,9 +113,14 @@ export default defineConfig(({mode, isSsrBuild}) => {
   };
 });
 
+type PackageJson = {
+  dependencies: Record<string, string>;
+  peerDependencies: Record<string, string>;
+};
+
 const externals = [
-  ...Object.keys(packageJson.dependencies),
-  ...Object.keys(packageJson.peerDependencies),
+  ...Object.keys((packageJson as PackageJson).dependencies),
+  ...Object.keys((packageJson as PackageJson).peerDependencies),
   'react/jsx-runtime',
   'worktop/cookie',
 ];

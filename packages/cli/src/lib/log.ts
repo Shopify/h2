@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import {
   renderInfo,
   renderWarning,
