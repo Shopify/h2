@@ -1,6 +1,6 @@
 import {readFile} from '@shopify/cli-kit/node/fs';
 import {Session, type Profiler} from 'node:inspector';
-import type {SourceMapConsumer} from 'source-map';
+import {SourceMapConsumer} from 'source-map';
 import {handleMiniOxygenImportFail} from './mini-oxygen/common.js';
 import {importLocal} from './import-utils.js';
 
@@ -72,7 +72,6 @@ async function enhanceProfileNodes(
   sourceMapPath: string,
   sourceEntrypoint?: string,
 ) {
-  const {SourceMapConsumer} = await import('source-map');
   const sourceMap = JSON.parse(await readFile(sourceMapPath));
   const smc = await new SourceMapConsumer(sourceMap, 'file://' + sourceMapPath);
 

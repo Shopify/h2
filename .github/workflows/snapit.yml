@@ -10,10 +10,10 @@ jobs:
     name: Snapit
     if: ${{ github.event.issue.pull_request && github.event.comment.body == '/snapit' }}
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      id-token: write
+    # permissions:
+    #   contents: write
+    #   pull-requests: write
+    #   id-token: write
     steps:
       # This action can be executed by users with write permission to this repo
       - name: Checkout current branch
@@ -32,4 +32,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
+          # NPM_CONFIG_PROVENANCE: true
