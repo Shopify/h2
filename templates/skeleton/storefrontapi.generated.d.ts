@@ -73,7 +73,7 @@ export type CartApiQueryFragment = Pick<
   'updatedAt' | 'id' | 'checkoutUrl' | 'totalQuantity' | 'note'
 > & {
   appliedGiftCards: Array<
-    Pick<StorefrontAPI.AppliedGiftCard, 'lastCharacters'> & {
+    Pick<StorefrontAPI.AppliedGiftCard, 'id' | 'lastCharacters'> & {
       amountUsed: Pick<StorefrontAPI.MoneyV2, 'currencyCode' | 'amount'>;
     }
   >;

@@ -60,6 +60,10 @@ export async function action({request, context}: ActionFunctionArgs) {
       result = await cart.updateGiftCardCodes(giftCardCodes);
       break;
     }
+    case CartForm.ACTIONS.GiftCardCodesRemove: {
+      result = await cart.removeGiftCardCodes(inputs.appliedGiftCardIds)
+      break;
+    }
     case CartForm.ACTIONS.BuyerIdentityUpdate: {
       result = await cart.updateBuyerIdentity({
         ...inputs.buyerIdentity,

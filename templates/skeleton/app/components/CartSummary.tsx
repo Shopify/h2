@@ -110,7 +110,19 @@ function CartGiftCard({
 }) {
   const appliedGiftCardCodes = useRef<string[]>([]);
   const giftCardCodeInput = useRef<HTMLInputElement>(null);
-  const codes: string[] = giftCardCodes?.map(({lastCharacters}) => `***${lastCharacters}`) || [];
+
+  const matchedGiftCardCode: string[] = [];
+  giftCardCodes?.forEach(({lastCharacters}) => {
+    const matchedCode = appliedGiftCardCodes.current.filter((code)  => {
+      const last4Characters = code.slice(-4);
+      const regex = new RegExp(`${last4Characters}$`)
+      return regex.test(lastCharacters)
+    })
+    if (matchedCode.length) {
+      matchedGiftCardCode.push(matchedCode[0])
+    }
+  });
+  appliedGiftCardCodes.current = matchedGiftCardCode;
 
   function saveAppliedCode(code: string) {
     const formattedCode = code.replace(/\s/g, ''); // Remove spaces
@@ -120,33 +132,36 @@ function CartGiftCard({
     giftCardCodeInput.current!.value = '';
   }
 
-  function removeAppliedCode() {
-    appliedGiftCardCodes.current = [];
-  }
-
   return (
     <div>
       {/* Have existing gift card applied, display it with a remove option */}
-      <dl hidden={!codes.length}>
+      <dl hidden={giftCardCodes &&  !giftCardCodes.length}>
         <div>
           <dt>Applied Gift Card(s)</dt>
-          <UpdateGiftCardForm>
+          {giftCardCodes && giftCardCodes.map((code) => (
+            <CartForm
+              key={code.id}
+              route="/cart"
+              action={CartForm.ACTIONS.GiftCardCodesRemove}
+              inputs={{
+                appliedGiftCardIds: [code.id],
+              }}
+            >
             <div className="cart-discount">
-              <code>{codes?.join(', ')}</code>
+              <code>{code.lastCharacters}</code>
               &nbsp;
-              <button onSubmit={() => removeAppliedCode}>Remove</button>
+              <button type="submit">Remove</button>
             </div>
-          </UpdateGiftCardForm>
+          </CartForm>
+          ))}
         </div>
       </dl>
 
       {/* Show an input to apply a discount */}
       <UpdateGiftCardForm giftCardCodes={appliedGiftCardCodes.current} saveAppliedCode={saveAppliedCode}>
-        <div>
-          <input type="text" name="giftCardCode" placeholder="Gift card code" ref={giftCardCodeInput} />
-          &nbsp;
-          <button type="submit">Apply</button>
-        </div>
+        <input type="text" name="giftCardCode" placeholder="Gift card code" ref={giftCardCodeInput} />
+        &nbsp;
+        <button type="submit">Apply</button>
       </UpdateGiftCardForm>
     </div>
   );
