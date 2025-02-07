@@ -40,7 +40,7 @@
     "@graphql-codegen/plugin-helpers": "^5.0.2",
     "dts-bundle-generator": "^9.3.1",
     "type-fest": "^4.26.1",
-    "vitest": "^1.0.4"
+    "vitest": "^1.6.1"
   },
   "dependencies": {
     "@shopify/graphql-codegen": "^0.0.2"

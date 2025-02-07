@@ -89,7 +89,7 @@
     "happy-dom": "^17.0.0",
     "react": "^18.2.0",
     "schema-dts": "^1.1.0",
-    "vitest": "^1.0.4"
+    "vitest": "^1.6.1"
   },
   "peerDependencies": {
     "@remix-run/react": "^2.10.0",

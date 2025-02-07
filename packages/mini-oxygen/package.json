@@ -76,7 +76,7 @@
     "devtools-protocol": "^0.0.1177611",
     "eventsource": "^2.0.2",
     "tempy": "3.0.0",
-    "vitest": "^1.0.4"
+    "vitest": "^1.6.1"
   },
   "peerDependencies": {
     "vite": "^5.1.0"
