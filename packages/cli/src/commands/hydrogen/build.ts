@@ -192,6 +192,9 @@ export async function runBuild({
         (process.env.NODE_ENV !== 'production' && sourcemap),
       watch: watch ? {} : null,
     },
+    server: {
+      watch: watch ? {} : null,
+    },
     plugins: [
       {
         name: 'hydrogen:cli:client',
@@ -228,6 +231,9 @@ export async function runBuild({
       minify: serverMinify,
       // Ensure the server rebuild start after the client one
       watch: watch ? {buildDelay: 100} : null,
+    },
+    server: {
+      watch: watch ? {} : null,
     },
     plugins: [
       {

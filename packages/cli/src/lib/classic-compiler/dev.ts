@@ -42,6 +42,7 @@ import {
 } from '../dev-shared.js';
 import {getCliCommand} from '../shell.js';
 import {importLocal} from '../import-utils.js';
+import {RouteManifest} from '@remix-run/dev/dist/config/routes.js';
 
 const LOG_REBUILDING = '🧱 Rebuilding...';
 const LOG_REBUILT = '🚀 Rebuilt';
@@ -65,6 +66,19 @@ type DevOptions = {
   verbose?: boolean;
   envFile: string;
 };
+
+function filterOutVirtualRoutes(config: RemixConfig): RemixConfig {
+  let routes: RouteManifest = {};
+  Object.entries(config.routes).forEach(([key, value]) => {
+    if (!key.includes('virtual-routes')) {
+      routes[key] = value;
+    }
+  });
+  return {
+    ...config,
+    routes,
+  };
+}
 
 export async function runClassicCompilerDev({
   port: appPort,
@@ -100,7 +114,7 @@ export async function runClassicCompilerDev({
     const config = (await getRemixConfig(root)) as RemixConfig;
 
     return disableVirtualRoutes
-      ? config
+      ? filterOutVirtualRoutes(config)
       : addVirtualRoutes(config).catch((error) => {
           // Seen this fail when somehow NPM doesn't publish
           // the full 'virtual-routes' directory.

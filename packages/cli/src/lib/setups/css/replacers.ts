@@ -20,7 +20,10 @@ export async function replaceRootLinks(
     isAbsolute?: boolean;
   },
 ) {
-  const {filepath, astType} = await findFileWithExtension(appDirectory, 'root');
+  const {filepath, astType} = await findFileWithExtension(
+    appDirectory,
+    'layout',
+  );
 
   if (!filepath || !astType) {
     throw new AbortError(`Could not find root file in ${appDirectory}`);

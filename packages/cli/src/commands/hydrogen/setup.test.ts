@@ -44,7 +44,8 @@ describe('setup', () => {
         force: true,
         recursive: true,
         filter: (src) =>
-          !src.includes('node_modules') && !src.includes('routes'),
+          (!src.includes('node_modules') && !src.includes('routes')) ||
+          src.endsWith('routes.ts'),
       });
 
       await expect(

@@ -79,11 +79,36 @@ export async function getRemixConfig(
 
   type RemixConfig = typeof import('@remix-run/dev/dist/config.js');
 
-  const {readConfig} = await importLocal<RemixConfig>(
+  const {resolveConfig} = await importLocal<RemixConfig>(
     '@remix-run/dev/dist/config.js',
     root,
   ).catch(handleRemixImportFail);
-  const config = await readConfig(root, mode);
+
+  type RemixViteNodeConfig =
+    typeof import('@remix-run/dev/dist/vite/vite-node.js');
+
+  const {createContext} = await importLocal<RemixViteNodeConfig>(
+    '@remix-run/dev/dist/vite/vite-node.js',
+    root,
+  ).catch(handleRemixImportFail);
+
+  type RemixViteESMConfig =
+    typeof import('@remix-run/dev/dist/vite/import-vite-esm-sync.js');
+
+  const {importViteEsmSync} = await importLocal<RemixViteESMConfig>(
+    '@remix-run/dev/dist/vite/import-vite-esm-sync.js',
+    root,
+  ).catch(handleRemixImportFail);
+
+  const appConfig = await getRawRemixConfig(root);
+  const routesViteNodeContext = await createContext({root, mode});
+  const vite = importViteEsmSync();
+  const config = await resolveConfig(appConfig, {
+    rootDirectory: root,
+    serverMode: mode,
+    vite,
+    routesViteNodeContext,
+  });
 
   if (isHydrogenMonorepo && hydrogenPackagesPath) {
     // Watch local packages when developing in Hydrogen repo
@@ -102,6 +127,10 @@ export async function getRemixConfig(
       path.join(packagesPath, 'cli', 'dist', 'virtual-routes', '**', '*'),
     );
   }
+
+  // Shut this down so that it doesn't cause the process to fail
+  // when it finishes running.
+  routesViteNodeContext.server.server.close();
 
   return config;
 }

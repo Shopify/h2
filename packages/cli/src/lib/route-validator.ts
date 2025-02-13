@@ -90,7 +90,10 @@ export function findMissingRoutes(
 
           if (!parentRoute) break;
 
-          currentRoute.path = `${parentRoute.path}/${currentRoute.path}`;
+          currentRoute.path =
+            parentRoute.path == null
+              ? currentRoute.path
+              : `${parentRoute.path}/${currentRoute.path}`;
           currentRoute.parentId = parentRoute.parentId;
         }
 

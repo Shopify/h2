@@ -28,9 +28,14 @@ describe('build', () => {
       outputMock.clear();
       vi.stubEnv('NODE_ENV', 'production');
 
-      await expect(
-        runBuild({directory: tmpDir, bundleStats: true}),
-      ).resolves.not.toThrow();
+      const runBuildResultPromise = runBuild({
+        directory: tmpDir,
+        bundleStats: true,
+      });
+
+      await expect(runBuildResultPromise).resolves.not.toThrow();
+
+      const runBuildResult = await runBuildResultPromise;
 
       const expectedBundlePath = 'dist/server/index.js';
 
@@ -57,6 +62,9 @@ describe('build', () => {
       await expect(
         readFile(joinPath(tmpDir, 'dist', 'server', BUNDLE_ANALYZER_HTML_FILE)),
       ).resolves.toMatch(/globalThis\.METAFILE = '.+';/g);
+
+      // Close build result resources.
+      await runBuildResult.close();
     });
   });
 });

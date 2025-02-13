@@ -1,0 +1,13 @@
+diff --git a/node_modules/@remix-run/dev/dist/vite/plugin.js b/node_modules/@remix-run/dev/dist/vite/plugin.js
+index dc3ecb2..07e74fa 100644
+--- a/node_modules/@remix-run/dev/dist/vite/plugin.js
++++ b/node_modules/@remix-run/dev/dist/vite/plugin.js
+@@ -613,7 +613,7 @@ const remixVitePlugin = (remixUserConfig = {}) => {
+         root: viteUserConfig.root,
+         mode: viteConfigEnv.mode,
+         server: {
+-          watch: viteCommand === "build" ? null : undefined
++          watch: viteCommand === "build" || process.env.SHOPIFY_UNIT_TEST ? null : undefined
+         },
+         ssr: {
+           external: ssrExternals

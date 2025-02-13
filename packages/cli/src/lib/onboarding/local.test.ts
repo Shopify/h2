@@ -40,8 +40,9 @@ describe('local templates', () => {
         (item) => !item.startsWith('app/'),
       );
 
-      expect(resultFiles).toEqual(expect.arrayContaining(nonAppFiles));
-
+      for (const nonAppFile of nonAppFiles) {
+        expect(resultFiles).toContain(nonAppFile);
+      }
       expect(resultFiles).toContain('app/root.tsx');
       expect(resultFiles).toContain('app/entry.client.tsx');
       expect(resultFiles).toContain('app/entry.server.tsx');
@@ -113,7 +114,9 @@ describe('local templates', () => {
 
       const resultFiles = await glob('**/*', {cwd: tmpDir});
 
-      expect(resultFiles).toEqual(expect.arrayContaining(templateFiles));
+      for (const templateFile of templateFiles) {
+        expect(resultFiles).toContain(templateFile);
+      }
       expect(resultFiles).toContain('app/routes/_index.tsx');
 
       // Not modified:
@@ -145,17 +148,16 @@ describe('local templates', () => {
         cwd: getSkeletonSourceDir(),
         ignore: ['**/node_modules/**', '**/dist/**'],
       });
+      const adjustedTemplateFiles = templateFiles.map((item) => {
+        return item
+          .replace(/(?<!\.d)\.ts(x)?$/, '.js$1')
+          .replace(/tsconfig\.json$/, 'jsconfig.json');
+      });
       const resultFiles = await glob('**/*', {cwd: tmpDir});
 
-      expect(resultFiles).toEqual(
-        expect.arrayContaining(
-          templateFiles.map((item) =>
-            item
-              .replace(/(?<!\.d)\.ts(x)?$/, '.js$1')
-              .replace(/tsconfig\.json$/, 'jsconfig.json'),
-          ),
-        ),
-      );
+      for (const templateFile of adjustedTemplateFiles) {
+        expect(resultFiles).toContain(templateFile);
+      }
 
       expect(resultFiles).toContain('app/routes/_index.jsx');
 
@@ -195,10 +197,10 @@ describe('local templates', () => {
           readFile(`${tmpDir}/app/styles/tailwind.css`),
         ).resolves.toMatch(/@import 'tailwindcss';/);
 
-        // Injects styles in Root
-        const rootFile = await readFile(`${tmpDir}/app/root.tsx`);
-        await expect(rootFile).toMatch(/import tailwindCss from/);
-        await expect(rootFile).toMatch(
+        // Injects styles in Layout.
+        const layoutFile = await readFile(`${tmpDir}/app/layout.tsx`);
+        await expect(layoutFile).toMatch(/import tailwindCss from/);
+        await expect(layoutFile).toMatch(
           /<link rel="stylesheet" href={tailwindCss}><\/link>/ims,
         );
 

@@ -1,20 +1,12 @@
-import {useNonce, getShopAnalytics, Analytics} from '@shopify/hydrogen';
+import {getShopAnalytics} from '@shopify/hydrogen';
 import {type LoaderFunctionArgs} from '@shopify/remix-oxygen';
 import {
-  Links,
-  Meta,
   Outlet,
-  Scripts,
   useRouteError,
-  useRouteLoaderData,
-  ScrollRestoration,
   isRouteErrorResponse,
   type ShouldRevalidateFunction,
 } from '@remix-run/react';
 import favicon from '~/assets/favicon.svg';
-import resetStyles from '~/styles/reset.css?url';
-import appStyles from '~/styles/app.css?url';
-import {PageLayout} from '~/components/PageLayout';
 import {FOOTER_QUERY, HEADER_QUERY} from '~/lib/fragments';
 
 export type RootLoader = typeof loader;
@@ -139,39 +131,6 @@ function loadDeferredData({context}: LoaderFunctionArgs) {
     isLoggedIn: customerAccount.isLoggedIn(),
     footer,
   };
-}
-
-export function Layout({children}: {children?: React.ReactNode}) {
-  const nonce = useNonce();
-  const data = useRouteLoaderData<RootLoader>('root');
-
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link rel="stylesheet" href={resetStyles}></link>
-        <link rel="stylesheet" href={appStyles}></link>
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        {data ? (
-          <Analytics.Provider
-            cart={data.cart}
-            shop={data.shop}
-            consent={data.consent}
-          >
-            <PageLayout {...data}>{children}</PageLayout>
-          </Analytics.Provider>
-        ) : (
-          children
-        )}
-        <ScrollRestoration nonce={nonce} />
-        <Scripts nonce={nonce} />
-      </body>
-    </html>
-  );
 }
 
 export default function App() {

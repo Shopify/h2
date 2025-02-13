@@ -1,0 +1,18 @@
+diff --git a/node_modules/vite/dist/node/chunks/dep-BKbDVx1T.js b/node_modules/vite/dist/node/chunks/dep-BKbDVx1T.js
+index 6d370a3..ab98ff8 100644
+--- a/node_modules/vite/dist/node/chunks/dep-BKbDVx1T.js
++++ b/node_modules/vite/dist/node/chunks/dep-BKbDVx1T.js
+@@ -12972,11 +12972,11 @@ function mergeConfigRecursively(defaults, overrides, rootPath) {
+     const merged = { ...defaults };
+     for (const key in overrides) {
+         const value = overrides[key];
+-        if (value == null) {
++        if (value == null && key !== 'watch') {
+             continue;
+         }
+         const existing = merged[key];
+-        if (existing == null) {
++        if (existing == null && key !== 'watch') {
+             merged[key] = value;
+             continue;
+         }

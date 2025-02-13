@@ -53,6 +53,12 @@ export function hydrogen(pluginOptions: HydrogenPluginOptions = {}): Plugin[] {
         ).pathname.endsWith('/hydrogen/packages/');
 
         return {
+          build: {
+            outDir: 'dist',
+          },
+          server: {
+            watch: null,
+          },
           ssr: {
             optimizeDeps: {
               // Add CJS dependencies that break code in workerd
@@ -188,6 +194,19 @@ function mergeOptions(
 
   return {...acc, ...newOptionsWithoutUndefined};
 }
+
+hydrogen.v3preset = () =>
+  ({
+    name: 'hydrogen',
+    remixConfigResolved({remixConfig}) {
+      sharedOptions.remixConfig = remixConfig;
+    },
+    remixConfig() {
+      return {
+        buildDirectory: 'dist',
+      };
+    },
+  } satisfies RemixPreset);
 
 hydrogen.preset = () =>
   ({
