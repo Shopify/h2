@@ -36,7 +36,7 @@
     "nodemon": "^2.0.22",
     "npm-run-all": "^4.1.5",
     "typescript": "^5.2.2",
-    "vite": "^5.1.8",
+    "vite": "^5.4.12",
     "vite-tsconfig-paths": "^4.3.1"
   },
   "engines": {
