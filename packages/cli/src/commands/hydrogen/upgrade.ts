@@ -23,9 +23,10 @@ import {
 } from '@shopify/cli-kit/node/fs';
 import {
   getDependencies,
-  installNodeModules,
   getPackageManager,
+  addNPMDependenciesIfNeeded,
   type PackageJson,
+  type DependencyVersion,
 } from '@shopify/cli-kit/node/node-package-manager';
 import {AbortError} from '@shopify/cli-kit/node/error';
 import {dirname, joinPath, resolvePath} from '@shopify/cli-kit/node/path';
@@ -645,13 +646,79 @@ export async function upgradeNodeModules({
       {
         title: `Upgrading dependencies`,
         task: async () => {
-          await installNodeModules({
+          const packageManager = await getPackageManager(appPath);
+
+          /* Update prodDependencies */
+          const dependencies: DependencyVersion[] = Object.entries(
+            selectedRelease.dependencies,
+          )
+            .filter((dependency) => {
+              const shouldUpgradeDep = maybeIncludeDependency({
+                currentDependencies,
+                dependency,
+                selectedRelease,
+              });
+              if (shouldUpgradeDep) return dependency;
+            })
+            .map((dependency) => {
+              return {
+                name: dependency[0],
+                version: getAbsoluteVersion(dependency[1]),
+              };
+            });
+
+          await addNPMDependenciesIfNeeded(dependencies, {
+            type: 'prod',
             directory: appPath,
-            packageManager: await getPackageManager(appPath),
-            args: buildUpgradeCommandArgs({
-              selectedRelease,
-              currentDependencies,
-            }),
+            packageManager: packageManager,
+          });
+
+          /* Update devDependencies */
+          const devDependencies: DependencyVersion[] = Object.entries(
+            selectedRelease.devDependencies,
+          )
+            .filter((dependency) => {
+              const shouldUpgradeDep = maybeIncludeDependency({
+                currentDependencies,
+                dependency,
+                selectedRelease,
+              });
+              if (shouldUpgradeDep) return dependency;
+            })
+            .map((dependency) => {
+              return {
+                name: dependency[0],
+                version: getAbsoluteVersion(dependency[1]),
+              };
+            });
+
+          await addNPMDependenciesIfNeeded(devDependencies, {
+            type: 'dev',
+            directory: appPath,
+            packageManager: packageManager,
+          });
+
+          /* Update Remix */
+          const remixDependencies: DependencyVersion[] = [];
+          for (const [name, version] of Object.entries(currentDependencies)) {
+            const isRemixPackage = isRemixDependency([name, version]);
+            const selectedRemix = Object.entries(
+              selectedRelease.dependencies,
+            ).find(isRemixDependency);
+
+            if (!isRemixPackage || !selectedRemix) {
+              continue;
+            }
+            remixDependencies.push({
+              name: name,
+              version: getAbsoluteVersion(selectedRemix[1]),
+            });
+          }
+
+          await addNPMDependenciesIfNeeded(dependencies, {
+            type: 'prod',
+            directory: appPath,
+            packageManager: packageManager,
           });
         },
       },
