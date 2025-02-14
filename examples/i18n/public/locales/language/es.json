@@ -1,0 +1,132 @@
+{
+  "name": "Español",
+  "code": "es",
+  "translation": {
+    "layout": {
+      "header": {
+        "ctas": {
+          "login": "Iniciar sesión",
+          "account": "Cuenta",
+          "search": "Buscar",
+          "cart": "Carrito"
+        }
+      },
+      "cart": {
+        "checkout": "Continuar al pago",
+        "continueShopping": "Continuar comprando",
+        "empty": "Parece que aún no has agregado nada, ¡vamos a empezar!",
+        "loading": "Cargando búsqueda...",
+        "remove": "Eliminar",
+        "subtotal": "Subtotal",
+        "title": "Carrito",
+        "total": "Total",
+        "quantity": "Cantidad",
+        "discounts": {
+          "title": "Descuento(s)",
+          "remove": "Eliminar",
+          "form": {
+            "label": "Código de descuento",
+            "placeholder": "Ingresa un código de descuento",
+            "submit": "Aplicar"
+          }
+        }
+      },
+      "search": {
+        "noResults": "No se encontraron resultados para \"{{query}}\"",
+        "results": {
+          "articles": "Artículos",
+          "collections": "Colecciones",
+          "products": "Productos",
+          "pages": "Páginas",
+          "suggestions": "Sugerencias"
+        },
+        "loading": "Cargando búsqueda...",
+        "title": "Búsqueda",
+        "viewAll": "Ver todos los resultados para \"{{query}}\"",
+        "form": {
+          "placeholder": "Ingresa un término de búsqueda",
+          "label": "Buscar",
+          "submit": "Buscar"
+        }
+      },
+      "pagination": {
+        "next": "Cargar más ↓",
+        "previous": "↑ Cargar anterior",
+        "loading": "Cargando..."
+      }
+    },
+    "home": {
+      "welcome": {
+        "title": "Hola mundo",
+        "subtitle": "Hydrogen se encuentra con i18n",
+        "description": "Acelera la creación de tu tienda en línea con Hydrogen, nuestra herramienta React basada en Remix. Despliégalo gratis en Oxygen, nuestra solución de hospedaje global."
+      }
+    },
+    "notFound": {
+      "title": "Página no encontrada",
+      "subtitle": "Lo sentimos, no pudimos encontrar la página que buscas.",
+      "description": "Por favor, verifica la URL en la barra de direcciones e intenta de nuevo.",
+      "cta": "Ir a la página de inicio"
+    },
+    "account": {
+      "home": {
+        "greeting": "Bienvenido a tu cuenta.",
+        "personalGreeting": "Bienvenido, {{firstName}}",
+        "menu": {
+          "orders": "Órdenes",
+          "profile": "Perfil",
+          "addresses": "Direcciones",
+          "logout": "Cerrar sesión"
+        }
+      },
+      "login": {
+        "title": "Iniciar sesión",
+        "form": {
+          "email": {
+            "label": "Correo electrónico",
+            "placeholder": "Ingresa tu correo electrónico"
+          },
+          "password": {
+            "label": "Contraseña",
+            "placeholder": "Ingresa tu contraseña"
+          },
+          "submit": "Iniciar sesión"
+        },
+        "forgot": "¿Olvidaste tu contraseña?",
+        "register": "Registrarse"
+      },
+      "register": {
+        "title": "Registrarse",
+        "description": "Crea tu cuenta",
+        "form": {
+          "email": {
+            "label": "Correo electrónico",
+            "placeholder": "Ingresa tu correo electrónico"
+          },
+          "password": {
+            "label": "Contraseña",
+            "placeholder": "Ingresa tu contraseña"
+          },
+          "confirmPassword": {
+            "label": "Confirmar contraseña",
+            "placeholder": "Vuelve a ingresar tu contraseña"
+          },
+          "submit": "Registrarse"
+        },
+        "login": "Iniciar sesión"
+      },
+      "recover": {
+        "title": "Contraseña olvidada",
+        "description": "Ingresa la dirección de correo electrónico asociada a tu cuenta para recibir un enlace para restablecer tu contraseña",
+        "form": {
+          "email": {
+            "label": "Correo electrónico",
+            "placeholder": "Ingresa tu correo electrónico"
+          },
+          "submit": "Restablecer contraseña"
+        },
+        "login": "Iniciar sesión"
+      }
+    }
+  }
+}

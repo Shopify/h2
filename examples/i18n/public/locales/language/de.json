@@ -1,0 +1,132 @@
+{
+  "name": "Deutsch",
+  "code": "de",
+  "translation": {
+    "layout": {
+      "header": {
+        "ctas": {
+          "login": "Anmelden",
+          "account": "Konto",
+          "search": "Suche",
+          "cart": "Warenkorb"
+        }
+      },
+      "cart": {
+        "checkout": "Weiter zur Kasse",
+        "continueShopping": "Weiter einkaufen",
+        "empty": "Es sieht so aus, als hätten Sie noch nichts hinzugefügt. Lassen Sie uns beginnen!",
+        "loading": "Suche wird geladen...",
+        "remove": "Entfernen",
+        "subtotal": "Zwischensumme",
+        "title": "Warenkorb",
+        "total": "Gesamt",
+        "quantity": "Menge",
+        "discounts": {
+          "title": "Rabatt(e)",
+          "remove": "Entfernen",
+          "form": {
+            "label": "Rabattcode",
+            "placeholder": "Geben Sie einen Rabattcode ein",
+            "submit": "Anwenden"
+          }
+        }
+      },
+      "search": {
+        "noResults": "Keine Ergebnisse für \"{{query}}\" gefunden",
+        "results": {
+          "articles": "Artikel",
+          "collections": "Sammlungen",
+          "products": "Produkte",
+          "pages": "Seiten",
+          "suggestions": "Vorschläge"
+        },
+        "loading": "Suche wird geladen...",
+        "title": "Suche",
+        "viewAll": "Alle Ergebnisse für \"{{query}}\" anzeigen",
+        "form": {
+          "placeholder": "Geben Sie einen Suchbegriff ein",
+          "label": "Suche",
+          "submit": "Suchen"
+        }
+      },
+      "pagination": {
+        "next": "Mehr laden ↓",
+        "previous": "↑ Vorheriges laden",
+        "loading": "Ladevorgang..."
+      }
+    },
+    "home": {
+      "welcome": {
+        "title": "Hallo Welt",
+        "subtitle": "Hydrogen trifft i18n",
+        "description": "Beschleunigen Sie den Aufbau Ihres Online-Shops mit Hydrogen, unserem auf Remix basierenden, reaktionsfähigen Headless-Toolkit. Bereitstellung kostenlos auf Oxygen, unserer globalen Hosting-Lösung."
+      }
+    },
+    "notFound": {
+      "title": "Seite nicht gefunden",
+      "subtitle": "Entschuldigung, wir konnten die von Ihnen gesuchte Seite nicht finden.",
+      "description": "Bitte überprüfen Sie die URL in der Adressleiste und versuchen Sie es erneut.",
+      "cta": "Zur Startseite gehen"
+    },
+    "account": {
+      "home": {
+        "greeting": "Willkommen in Ihrem Konto.",
+        "personalGreeting": "Willkommen, {{firstName}}",
+        "menu": {
+          "orders": "Bestellungen",
+          "profile": "Profil",
+          "addresses": "Adressen",
+          "logout": "Abmelden"
+        }
+      },
+      "login": {
+        "title": "Anmelden",
+        "form": {
+          "email": {
+            "label": "E-Mail-Adresse",
+            "placeholder": "Geben Sie Ihre E-Mail-Adresse ein"
+          },
+          "password": {
+            "label": "Passwort",
+            "placeholder": "Geben Sie Ihr Passwort ein"
+          },
+          "submit": "Anmelden"
+        },
+        "forgot": "Passwort vergessen?",
+        "register": "Registrieren"
+      },
+      "register": {
+        "title": "Registrieren",
+        "description": "Erstellen Sie Ihr Konto",
+        "form": {
+          "email": {
+            "label": "E-Mail-Adresse",
+            "placeholder": "Geben Sie Ihre E-Mail-Adresse ein"
+          },
+          "password": {
+            "label": "Passwort",
+            "placeholder": "Geben Sie Ihr Passwort ein"
+          },
+          "confirmPassword": {
+            "label": "Passwort bestätigen",
+            "placeholder": "Geben Sie Ihr Passwort erneut ein"
+          },
+          "submit": "Registrieren"
+        },
+        "login": "Anmelden"
+      },
+      "recover": {
+        "title": "Passwort vergessen",
+        "description": "Geben Sie die mit Ihrem Konto verknüpfte E-Mail-Adresse ein, um einen Link zum Zurücksetzen Ihres Passworts zu erhalten",
+        "form": {
+          "email": {
+            "label": "E-Mail-Adresse",
+            "placeholder": "Geben Sie Ihre E-Mail-Adresse ein"
+          },
+          "submit": "Passwort zurücksetzen"
+        },
+        "login": "Anmelden"
+      }
+    }
+  }
+}

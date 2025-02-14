@@ -1,0 +1,132 @@
+{
+  "name": "English",
+  "code": "en",
+  "translation": {
+    "layout": {
+      "header": {
+        "ctas": {
+          "login": "Login",
+          "account": "Account",
+          "search": "Search",
+          "cart": "Cart"
+        }
+      },
+      "cart": {
+        "checkout": "Continue to checkout",
+        "continueShopping": "Continue shopping",
+        "empty": "Looks like you haven’t added anything yet, let’s get you started!",
+        "loading": "Loading search...",
+        "remove": "Remove",
+        "subtotal": "Subtotal",
+        "title": "Cart",
+        "total": "Total",
+        "quantity": "Quantity",
+        "discounts": {
+          "title": "Discount(s)",
+          "remove": "Remove",
+          "form": {
+            "label": "Discount code",
+            "placeholder": "Enter a discount code",
+            "submit": "Apply"
+          }
+        }
+      },
+      "search": {
+        "noResults": "No results found for \"{{query}}\"",
+        "results": {
+          "articles": "Articles",
+          "collections": "Collections",
+          "products": "Products",
+          "pages": "Pages",
+          "suggestions": "Suggestions"
+        },
+        "loading": "Loading search...",
+        "title": "Search",
+        "viewAll": "View all results for \"{{query}}\"",
+        "form": {
+          "placeholder": "Enter a search term",
+          "label": "Search",
+          "submit": "Search"
+        }
+      },
+      "pagination": {
+        "next": "Load more ↓",
+        "previous": "↑ Load previous",
+        "loading": "Loading..."
+      }
+    },
+    "home": {
+      "welcome": {
+        "title": "Hello world",
+        "subtitle": "Hydrogen meets i18n",
+        "description": "Fast-track your storefront build with Hydrogen, our React-based headless toolkit, built on Remix. Deploy for free on Oxygen, our global hosting solution."
+      }
+    },
+    "notFound": {
+      "title": "Page not found",
+      "subtitle": "Sorry, we couldn't find the page you were looking for.",
+      "description": "Please check the URL in the address bar and try again.",
+      "cta": "Go to homepage"
+    },
+    "account": {
+      "home": {
+        "greeting": "Welcome to your account.",
+        "personalGreeting": "Welcome, {{firstName}}",
+        "menu": {
+          "orders": "Orders",
+          "profile": "Profile",
+          "addresses": "Addresses",
+          "logout": "Sign out"
+        }
+      },
+      "login": {
+        "title": "Sign in.",
+        "form": {
+          "email": {
+            "label": "Email",
+            "placeholder": "Enter your email address"
+          },
+          "password": {
+            "label": "Password",
+            "placeholder": "Enter your password"
+          },
+          "submit": "Sign in"
+        },
+        "forgot": "Forgot password?",
+        "register": "Register"
+      },
+      "register": {
+        "title": "Register.",
+        "description": "Create your account",
+        "form": {
+          "email": {
+            "label": "Email address",
+            "placeholder": "Enter your email address"
+          },
+          "password": {
+            "label": "Password",
+            "placeholder": "Enter your password"
+          },
+          "confirmPassword": {
+            "label": "Re-enter password",
+            "placeholder": "Re-enter your password"
+          },
+          "submit": "Register"
+        },
+        "login": "Login"
+      },
+      "recover": {
+        "title": "Forgot password.",
+        "description": "Enter the email address associated with your account to receive a link to reset your password",
+        "form": {
+          "email": {
+            "label": "Email address",
+            "placeholder": "Enter your email address"
+          },
+          "submit": "Reset password"
+        },
+        "login": "Login"
+      }
+    }
+  }
+}
